@@ -1,5 +1,5 @@
 body {
-    /*background-image: url("../img/back.jpeg");*/
+    background-image: url("assets/img/back.jpeg");
     background-size: 100% 100vh;
     background-repeat: no-repeat;
     font-family: "Lato", sans-serif;
@@ -10,59 +10,6 @@ body {
     margin-left: 2em;
 }
 
-.sidenav {
-    height: 100vh;
-    width: 40px;
-    position: fixed;
-    z-index: 1;
-    top: 0;
-    left: 0;
-    background-color: #F50823;
-    overflow-x: hidden;
-    padding-top: 100px;
-}
-
-.sidenav a {
-    padding: 6px 0px 6px 8px;
-    text-decoration: none;
-    font-size: 20px;
-    color: white;
-    display: block;
-}
-
-.sidenav a:hover {
-    color: #f1f1f1;
-}
-
-.main {
-    /* margin-left: 100px; Same as the width of the sidenav */
-    font-size: 28px;
-    /* Increased text to enable scrolling */
-    padding: 0px 10px;
-}
-
-#menu {
-    margin-top: 20vh;
-}
-
-#menu_2 {
-    margin-top: 5vh;
-    /* margin-left: 5vw; */
-}
-
-.menu a {
-    text-decoration: none;
-    color: white;
-}
-
-.card {
-    background-color: #F50823;
-    border-radius: 1rem;
-}
-
-.card-title {
-    font-size: 10px;
-}
 
 .modal-content {
     background-color: #ECDCE0;
