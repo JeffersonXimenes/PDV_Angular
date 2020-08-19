@@ -1,17 +1,9 @@
-.main {
-    /* margin-left: 100px; Same as the width of the sidenav */
-    font-size: 28px;
-    /* Increased text to enable scrolling */
-    padding: 0px 10px;
-}
-
 #menu {
     margin-top: 20vh;
 }
 
 #menu_2 {
     margin-top: 5vh;
-    /* margin-left: 5vw; */
 }
 
 .menu a {
@@ -26,4 +18,8 @@
 
 .card-title {
     font-size: 10px;
+}
+
+.tamanhoCard {
+    height: 210px;
 }

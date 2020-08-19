@@ -9,6 +9,7 @@ export class HeaderComponent implements OnInit {
 
   constructor() { }
 
+
   imagens = {
     img: "/Users/Treinamento/Documents/PDV/static/img/logo.png"
   }
