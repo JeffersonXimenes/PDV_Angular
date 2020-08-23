@@ -3,13 +3,16 @@ body {
     background-size: 100% 100vh;
     background-repeat: no-repeat;
     font-family: "Lato", sans-serif;
-    font-size: 28px ;
+    font-size: 28px;
 }
-#corpo{
+
+#corpo {
     margin-left: 2em;
 }
 
+
 /*  SideBar */
+
 .sidenav {
     height: 100vh;
     width: 40px;
@@ -21,7 +24,7 @@ body {
     overflow-x: hidden;
     padding-top: 100px;
 }
-  
+
 .sidenav a {
     padding: 6px 0px 6px 8px;
     text-decoration: none;
@@ -29,42 +32,44 @@ body {
     color: white;
     display: block;
 }
-  
+
 .sidenav a:hover {
     color: #f1f1f1;
 }
 
 
 /* Corpo do sistema */
+
 .main {
     /* margin-left: 100px; Same as the width of the sidenav */
-    font-size: 28px; /* Increased text to enable scrolling */
+    font-size: 28px;
+    /* Increased text to enable scrolling */
     padding: 0px 10px;
 }
 
 
-
-
 /* Menus */
-#menu1{
+
+#menu1 {
     margin-top: 20vh;
 }
-#menu2{
+
+#menu2 {
     margin-top: 5vh;
     /* margin-left: 5vw; */
 }
 
-.menu a{
+.menu a {
     text-decoration: none;
     color: white;
 }
 
-.card{
+.card {
     background-color: #F50823;
-    border-radius: 1rem ;
+    border-radius: 1rem;
 }
 
-.card-title{
+.card-title {
     font-size: 10px;
 }
 
@@ -76,45 +81,45 @@ body {
     background-color: aqua;
 }
 
-#wrapper{
+#wrapper {
     height: 80vh;
     background-color: rgba(255, 255, 255, 0.50);
 }
 
-.list-group a{
+.list-group a {
     font-size: 15px;
 }
 
-.items-flex{
+.items-flex {
     display: inline-flex;
     justify-content: space-between;
     align-items: flex-end;
-    height: 60vh; 
+    height: 60vh;
     text-align: center;
-
 }
 
 .valoresPagamento {
     border-radius: 20px;
     background-color: #F50823 !important;
-    
 }
 
-.telaVendas{
+.telaVendas {
     margin-left: 100px;
 }
 
 
 /* Modals */
-.modal-content{
+
+.modal-content {
     background-color: #ECDCE0;
     border-radius: 1rem;
 }
 
-.btn-success{
+.btn-success {
     text-decoration: none;
     color: white !important;
 }
+
 
 /* DAQUI PRA BAIXO FOI UTILIZADO PRA ARRUMAR A MODAL <3 */
 
@@ -122,10 +127,10 @@ body {
     text-align: center;
     color: black !important;
     font-weight: bold;
-     
 }
 
-.consertaModalCPF, .consertaModalEntradaOperador{
+.consertaModalCPF,
+.consertaModalEntradaOperador {
     text-align: center;
     color: black !important;
     font-weight: bold;
@@ -134,19 +139,18 @@ body {
 
 .consertaModalTitle {
     text-align: center;
-    color:  #666666 !important;
-    font-weight: bold;   
+    color: #666666 !important;
+    font-weight: bold;
     font-size: 20px;
     display: flex;
     justify-content: center;
     margin-left: 130px;
-    
 }
 
 .consertModalTitleRecarga {
     text-align: center;
-    color:  #666666 !important;
-    font-weight: bold;   
+    color: #666666 !important;
+    font-weight: bold;
     font-size: 20px;
     justify-content: center;
     margin-left: 120px;
@@ -159,28 +163,26 @@ body {
 }
 
 .consertaModalBotton {
- 
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    align-items: flex-end;    
+    align-items: flex-end;
 }
 
 .consertModalTitleCliente {
     text-align: center;
-    color:  #666666 !important;
-    font-weight: bold;   
+    color: #666666 !important;
+    font-weight: bold;
     font-size: 20px;
     justify-content: center;
     /* margin-left: 60px; */
 }
-    
 
 .bottonRealizadoSucesso {
     justify-content: center;
 }
 
-.bottonRealizadoSucesso a{
+.bottonRealizadoSucesso a {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -208,13 +210,13 @@ input {
     font-size: 12px;
 }
 
-.modal-footer{
+.modal-footer {
     display: flex;
     justify-content: space-between;
 }
 
 .VisualDateHours {
-    font-size: 16px; 
-    margin-top: -43px; 
-    color:  #595959;
+    font-size: 16px;
+    margin-top: -43px;
+    color: #595959;
 }

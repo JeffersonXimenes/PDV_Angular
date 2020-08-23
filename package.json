@@ -19,7 +19,12 @@
     "@angular/platform-browser": "~10.0.9",
     "@angular/platform-browser-dynamic": "~10.0.9",
     "@angular/router": "~10.0.9",
+    "angular2-text-mask": "^9.0.0",
     "bootstrap": "^4.5.0",
+    "input": "^1.0.1",
+    "inputmask": "^5.0.5",
+    "jquery": "^3.5.1",
+    "mask": "^0.2.2",
     "rxjs": "~6.5.5",
     "tslib": "^2.0.0",
     "zone.js": "~0.10.3"
