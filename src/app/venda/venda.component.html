@@ -1,0 +1,52 @@
+<div class="row mt-5">
+    <div class="d-flex col-sm" id="wrapper">
+        <div class="col-7 bg-light border-right mt-2" id="sidebar-wrapper">
+            <div class="sidebar-heading"></div>
+            <div class="list-group list-group-flush">
+                <a href="#" class="list-group-item list-group-item-action bg-light">1x LAXANTE - PALMOLIVE
+                    R$ 29,87 </a>
+                <a href="#" class="list-group-item list-group-item-action bg-light"> </a>
+                <div class="container items-flex">
+                    <!-- LETRAS EM CIMA DOS BOTÕES -->
+                    <form id="vendaTop">
+                        <div class="row">
+                            <div class="col">
+                                <label for="qtd-item">QTD ITEM</label>
+                                <input type="number" class="form-control valoresPagamento" id="qtd-item" readonly>
+                            </div>
+                            <div class="col">
+
+                                <label for="desconto">DESCONTO</label>
+                                <input type="number" class="form-control valoresPagamento" id="desconto" readonly>
+
+                            </div>
+                            <div class="col">
+                                <label for="total">TOTAL</label>
+                                <input type="number" class="form-control valoresPagamento" id="total" readonly>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- BODY DO LADO -->
+        <div class="container mt-2 ml-1" style="background-color: white;">
+            <div class="col-12 ">
+                <label for="codProduto">CÓDIGO DO PRODUTO</label>
+                <input type="text" class="form-control" id="codProduto" onkeyup="validaNumero(this)" maxlength="13">
+                <div class="items-flex">
+                    <div class="ml mt-5">
+                        <label>Operador: </label>
+
+                        <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#">CANCELAR</button>
+
+                        <button type="button" class="btn btn-success" data-toggle="modal" data-target="#formasPagamento">CONFIRMAR</button>
+
+                        <input type="text" class="form-control" id="codProduto" placeholder="CPF" readonly>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

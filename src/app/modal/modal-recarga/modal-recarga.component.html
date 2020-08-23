@@ -1,0 +1,118 @@
+<app-card-home></app-card-home>
+<!-- Modal recarga -->
+<div class="modal fade" id="modalRecarga" tabindex="-1" role="dialog" aria-labelledby="modalPagamentoLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title consertModalTitleRecarga" id="modalPagamentoLabel">RECARGA DE CELULAR
+                </h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true" routerLink="/" >&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+                <form id="sla" style="font-weight: bold; color: black; font-size: 20px;">
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label for="formGroupExampleInput">OPERADORA</label>
+                                <select name="cCargo" id="cCargo" class="form-control" style="height: 47px; margin-top: 2px;" required>
+                                  <option name="" id="" class="form-control" value=""></option>
+                                  <option name="cCargo" class="form-control" id="operadoraVivo">VIVO
+                                  </option>
+                                  <option name="cCargo" class="form-control" id="operadoraClaro">CLARO
+                                  </option>
+                                  <option name="cCargo" class="form-control" id="operadoraTim">TIM
+                                  </option>
+                                  <option name="cCargo" class="form-control" id="operadoraOI">OI</option>
+                              </select>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="formGroupExampleInput">VALOR(R$)</label>
+                                <input type="text" class="form-control" id="recebido" placeholder="R$ 0,00">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label for="formGroupExampleInput">NÚMERO</label>
+                                <input type="text" [textMask]="{mask: validaNumero}" class="form-control " id="numero " placeholder="(0XX)9XXXX-XXXX ">
+
+                            </div>
+                            <div class=" col-md-6 ">
+                                <label for="formGroupExampleInput ">CONFIRMAÇÃO</label>
+                                <input type="text" [textMask]="{mask: validaNumero}" class="form-control " id="recebido " placeholder="(0XX)9XXXX-XXXX ">
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" routerLink=" " class="btn btn-danger" data-dismiss="modal" id="btnCancelarPagamento ">CANCELAR</button>
+                <a class="btn btn-success" data-dismiss="modal" data-toggle="modal" href="#modalCupom ">CONFIRMAR</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Confirmar Operadora-->
+<div class="modal fade" id="modalCupom" tabindex="-1 " role="dialog " aria-labelledby="modalCupomLabel" aria-hidden="true">
+    <div class=" modal-dialog modal-dialog-centered ">
+        <div class="modal-content ">
+            <div class="modal-header ">
+                <h5 class="modal-title consertModalTitileCliente " id="modalCupomLabel ">FORMA DE PAGAMENTO: DINHEIRO</h5>
+                <button type="button " class="close " data-dismiss="modal" aria-label="Close "> <span routerLink=" " aria-hidden="true ">&times;</span></button>
+            </div>
+            <div class="row ">
+                <div class="col-md-6 " style="text-align: center ">
+                    <label for="formGroupExampleInput ">OPERADORA</label>
+                    <p><strong>TIM</strong></p>
+                </div>
+                <div class="col-md-6 " style="text-align: center; ">
+                    <label for="formGroupExampleInput ">VALOR</label>
+                    <p><strong>R$: 50,00</strong></p>
+                </div>
+            </div>
+            <div class="row ">
+                <div class="col-md " style="text-align: center ">
+                    <label for="formGroupExampleInput ">Numero</label>
+                    <p><strong>(0XX)9XXXX-XXXX</strong></p>
+                </div>
+            </div>
+            <div class="modal-footer ">
+                <button type="button " class="btn btn-danger " data-dismiss="modal " routerLink=" " id="Btncancelar ">CANCELAR</button>
+                <a class="btn btn-success " data-dismiss="modal " data-toggle="modal " href="#modalCupomImpresso ">CONFIRMAR</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Imprimir Cupom-->
+<div class="modal fade " id="modalCupomImpresso " tabindex="-1 " role="dialog " aria-labelledby="modalCupomLabel " aria-hidden="true ">
+    <div class="modal-dialog modal-dialog-centered ">
+        <div class="modal-content ">
+            <div class="modal-header ">
+                <h5 class="modal-title consertModalTitileCliente " id="modalCupomImpressoLabel ">FORMA DE PAGAMENTO: DINHEIRO</h5>
+                <button type="button " class="close " data-dismiss="modal " aria-label="Close "> <span aria-hidden="true " routerLink=" " >&times;</span></button>
+            </div>
+            <div class="row ">
+                <div class="col-md-6 " style="text-align: center ">
+                    <label for="formGroupExampleInput ">OPERADORA</label>
+                    <p><strong>TIM</strong></p>
+                </div>
+                <div class="col-md-6 " style="text-align: center; ">
+                    <label for="formGroupExampleInput ">VALOR</label>
+                    <p><strong>R$: 50,00</strong></p>
+                </div>
+            </div>
+            <div class="row ">
+                <div class="col-md " style="text-align: center ">
+                    <label for="formGroupExampleInput ">NÚMERO</label>
+                    <p><strong>(0XX)9XXXX-XXXX</strong></p>
+                </div>
+            </div>
+            <div class="modal-footer bottonRealizadoSucesso ">
+                <a class="btn btn-success " data-dismiss="modal " data-toggle="modal " href="#modalCupomEnviado " routerLink=" ">PAGÍNA INICIAL</a>
+            </div>
+        </div>
+    </div>
+</div>

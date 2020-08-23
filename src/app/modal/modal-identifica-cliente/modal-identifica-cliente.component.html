@@ -1,0 +1,27 @@
+<app-card-home></app-card-home>
+<!-- Início da Modal CPF -->
+<div class="modal fade" id="modalCpf" tabindex="-1" role="dialog" aria-labelledby="modalCpfLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title consertaModalTitile " id="modalCpfLabel">IDENTIFICA CLIENTE</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            </div>
+            <div class="modal-body consertaModalCPF">
+                <form id="sla">
+                    <div class="form-group">
+                        <label for="formGroupExampleInput">CPF</label>
+                        <input type="text" class="form-control" id="cpf" placeholder="000.000.000-00" onkeyup="validaNumeroCPF(this)" required>
+                        <div class="alert alert-success" role="alert" style="display: none;" id="alertCpfValido">Cpf válido</div>
+                        <div class="alert alert-danger" role="alert" style="display: none;" id="alertCpfInvalido">Cpf inválido</div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer consertaModalBotton    ">
+                <button type="button" class="btn btn-danger" data-dismiss="modal" routerLink="">CANCELAR</button>
+                <button type="button" class="btn btn-success" data-dismiss="modal" routerLink="venda" id="btnConfirmarCliente">CONFIRMAR</button>
+
+            </div>
+        </div>
+    </div>
+</div>
