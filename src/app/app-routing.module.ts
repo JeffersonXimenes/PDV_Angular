@@ -9,6 +9,7 @@ import { ModalIdentificaClienteComponent } from './modal/modal-identifica-client
 import { ModalRecargaComponent } from './modal/modal-recarga/modal-recarga.component';
 import { ModalMatriculaOperadorComponent } from './modal/modal-matricula-operador/modal-matricula-operador.component';
 import { VendaComponent } from './venda/venda.component';
+import { modalVendaRoutes } from './modal-venda/modal-routing.module';
 
 export const routes: Routes = [
   { path: '', pathMatch: 'prefix', redirectTo: 'home'},
@@ -19,7 +20,9 @@ export const routes: Routes = [
   { path: 'home/aberturaCaixa', component: ModalAberturaCaixaComponent},
   { path: 'home/fechamentoCaixa', component: ModalFechamentoCaixaComponent},
   { path: 'home/identificaCliente', component: ModalIdentificaClienteComponent},
+  ...modalVendaRoutes
 ];
+
 
 @NgModule({
   declarations: [],

@@ -182,12 +182,10 @@ body {
     justify-content: center;
 }
 
-.bottonRealizadoSucesso a {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+.bottonRealizadoSucesso a{
     width: 450px;
     height: 50px;
+    text-align: center;
     font-weight: bold;
 }
 
