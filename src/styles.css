@@ -191,6 +191,15 @@ body {
     font-weight: bold;
 }
 
+.bottonRealizadoSucesso .confirmar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 470px;
+    height: 50px;
+    font-weight: bold;
+}
+
 .bottonRealizadoCupom a {
     justify-content: center;
     width: 450px;
