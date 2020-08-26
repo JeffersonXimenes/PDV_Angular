@@ -16,6 +16,7 @@ import { ModalRecargaComponent } from './modal/modal-recarga/modal-recarga.compo
 import { ModalAberturaCaixaComponent } from './modal/modal-abertura-caixa/modal-abertura-caixa.component';
 import { ModalFechamentoCaixaComponent } from './modal/modal-fechamento-caixa/modal-fechamento-caixa.component';
 import { ModalIdentificaClienteComponent } from './modal/modal-identifica-cliente/modal-identifica-cliente.component';
+import { HttpClientModule } from '@angular/common/http';
 
 
 @NgModule({
@@ -38,6 +39,7 @@ import { ModalIdentificaClienteComponent } from './modal/modal-identifica-client
     AppRoutingModule,
     FormsModule,
     TextMaskModule,
+    HttpClientModule
 
   ],
   providers: [],
