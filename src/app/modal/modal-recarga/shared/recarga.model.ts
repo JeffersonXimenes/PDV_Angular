@@ -3,3 +3,8 @@ export interface Recarga {
   valorRecarga: number;
   idOperadora: number;
 }
+
+
+export interface Operadora{
+
+}

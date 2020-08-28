@@ -94,7 +94,15 @@ body {
     display: inline-flex;
     justify-content: space-between;
     align-items: flex-end;
-    height: 60vh;
+    /* height: 60vh; */
+    text-align: center;
+}
+
+#bodyLado .items-flex{
+    display: inline-flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    height: 350px;
     text-align: center;
 }
 
@@ -219,4 +227,9 @@ input {
     font-size: 16px;
     margin-top: -43px;
     color: #595959;
+}
+
+#listaProdutos{
+    height: 350px;
+    overflow:auto;
 }

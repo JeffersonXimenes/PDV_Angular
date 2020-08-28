@@ -22,6 +22,9 @@ export class VendaComponent implements OnInit {
   total: number = 0;
   qtdTotal: number = 0;
   desconto: number = 0;
+  troco: number = 0;
+  valorRecebido: number = 0;
+
   ngOnInit(): void {
   }
 
@@ -37,6 +40,10 @@ export class VendaComponent implements OnInit {
     this.total += (this.request.valorProduto * this.quantidade);
     this.qtdTotal += (this.quantidade);
 
+  }
+
+  calcularTroco(){
+    this.troco = this.total - this.valorRecebido;
   }
 }
 

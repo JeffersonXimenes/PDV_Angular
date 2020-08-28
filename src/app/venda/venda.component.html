@@ -1,14 +1,18 @@
 <div class="row mt-5">
     <div class="d-flex col-sm" id="wrapper">
         <div class="col-7 bg-light border-right mt-2" id="sidebar-wrapper">
-            <div class="sidebar-heading"></div>
-            <div class="list-group list-group-flush">
+            <div class="sidebar-heading list-group">
                 <table>
                     <tr class="row">
                         <td class="col-2">QTD</td>
                         <td class="col-8">Produto</td>
                         <td class="col-2">Valor</td>
                     </tr>
+                </table>
+            </div>
+            <div class="list-group list-group-flush" id="listaProdutos">
+                <table>
+                    
                     <tr class="row" *ngFor="let produtos of listaDeProdutos" style="font-size: 15px;">
                         <td class="col-2" style="text-align: center;">{{produtos.qtdProduto}} X</td>
                         <td class="col-8" >{{produtos.descricaoProduto}}</td>
@@ -43,7 +47,7 @@
         </div>
 
         <!-- BODY DO LADO -->
-        <div class="container mt-2 ml-1" style="background-color: white; font-size: 14px;">
+        <div class="container mt-2 ml-1" style="background-color: white; font-size: 14px;" id="bodyLado"> 
             <div class="col-12 row">
                 <div class="col-6">
                     <label for="cdProduto">CÓDIGO DO PRODUTO</label>
