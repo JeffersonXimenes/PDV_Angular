@@ -9,7 +9,7 @@ import { NgForm } from '@angular/forms';
   styleUrls: ['./venda.component.css']
 })
 export class VendaComponent implements OnInit {
-  
+
   @ViewChild('formProdutos', { static: true }) formTarefa: NgForm;
 
   constructor(private produtoService: ProdutoService) { }
@@ -22,11 +22,17 @@ export class VendaComponent implements OnInit {
   total: number = 0;
   qtdTotal: number = 0;
   desconto: number = 0;
+  dinheiro: number = 0;
+  filial = JSON.parse(localStorage['filial']);
+  troco: number = 0;
+  recebido: number = 0;
+
   ngOnInit(): void {
   }
 
   buscarProduto() {
     this.produtoService.getProduto(this.id).subscribe(response => {this.request = response; this.addProdutoLista();console.log(this.request.cdProduto);
+    let produto = localStorage['produto'] = JSON.stringify(this.listaDeProdutos);
     });
   }
 
@@ -38,9 +44,13 @@ export class VendaComponent implements OnInit {
     this.qtdTotal += (this.quantidade);
 
   }
+
+  calcularTroco(){
+    this.troco = this.total - this.recebido;
+  }
 }
 
 class VendaItem {
-  constructor(public cdProduto: number, public valorProduto: number, public descricaoProduto: String, 
+  constructor(public cdProduto: number, public valorProduto: number, public descricaoProduto: String,
     public qtdProduto: number) { }
 }
