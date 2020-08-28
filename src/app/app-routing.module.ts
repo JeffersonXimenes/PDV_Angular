@@ -21,7 +21,7 @@ export const routes: Routes = [
   { path: 'home/fechamentoCaixa', component: ModalFechamentoCaixaComponent},
   { path: 'home/identificaCliente', component: ModalIdentificaClienteComponent},
   { path: 'home/identificaCliente/venda', component: VendaComponent},
-  { path: 'home/identificaCliente/venda/formaPagamento', component: ModalFormaPagamentoComponent },
+  //{ path: 'home/identificaCliente/venda/formaPagamento', component: ModalFormaPagamentoComponent },
 ];
 
 @NgModule({

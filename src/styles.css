@@ -99,11 +99,11 @@ body {
 }
 
 #bodyLado .items-flex{
-    display: inline-flex;
-    justify-content: space-between;
-    align-items: flex-end;
-    height: 350px;
-    text-align: center;
+  display: inline-flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  height: 320px;
+  text-align: center;
 }
 
 .valoresPagamento {
@@ -230,6 +230,11 @@ input {
 }
 
 #listaProdutos{
-    height: 350px;
-    overflow:auto;
+  height: 350px;
+  overflow:auto;
+}
+
+.tamanhoText {
+  text-align: left;
+  font-size: 22px;
 }
