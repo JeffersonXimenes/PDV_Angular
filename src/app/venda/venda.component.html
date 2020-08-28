@@ -28,13 +28,13 @@
                             <div class="col">
 
                                 <label for="desconto">DESCONTO</label>
-                                <input type="number" class="form-control valoresPagamento" id="desconto" readonly value="{{desconto}}"  style="color: white; text-align: center;">  
+                                <input type="number" class="form-control valoresPagamento" id="desconto" readonly value="{{desconto}}"  style="color: white; text-align: center;">
 
                             </div>
                             <div class="col">
                                 <label for="total">TOTAL</label>
                                 <p type="number" class="form-control valoresPagamento" id="total" style="color: white;"  readonly>  {{total | currency}} </p>
-                                
+
                             </div>
                         </div>
                     </form>
@@ -55,8 +55,8 @@
                         name="qtdProdutos">
                 </div>
             </div>
-            <div style="margin-left: 137px;">
-                <button (click)="buscarProduto()">Confirmar produto</button>
+            <div style="margin-left: 15px; margin-top: 10px">
+                <button class="btn btn-success" (click)="buscarProduto()">CONFIRMAR PRODUTO</button>
             </div>
             <div>
                 <div class="items-flex">
@@ -66,8 +66,7 @@
                         <button type="button" class="btn btn-danger" data-toggle="modal"
                             data-target="#">CANCELAR</button>
 
-                        <button type="button" class="btn btn-success" data-toggle="modal"
-                            data-target="#formasPagamento">CONFIRMAR</button>
+                        <button type="button" class="btn btn-success" data-toggle="modal" routerLink="formaPagamento" data-target="#formasPagamento">CONFIRMAR</button>
 
                         <input type="text" class="form-control" id="codProduto" placeholder="CPF" readonly>
                     </div>
