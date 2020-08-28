@@ -15,8 +15,7 @@ export class CardHomeComponent implements OnInit {
   }
 
 
-  var teste = new Array(1);
-  var aux = teste.push(10);
+
 
   // card: Cards[] = [
   //   {

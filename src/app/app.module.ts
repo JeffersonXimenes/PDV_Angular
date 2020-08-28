@@ -20,7 +20,8 @@ import { ModalAberturaCaixaComponent } from './modal/modal-abertura-caixa/modal-
 import { ModalFechamentoCaixaComponent } from './modal/modal-fechamento-caixa/modal-fechamento-caixa.component';
 import { ModalIdentificaClienteComponent } from './modal/modal-identifica-cliente/modal-identifica-cliente.component';
 import { RecargaService } from './modal/modal-recarga/shared/recarga.service';
-
+import { ModalFormaPagamentoComponent } from './modal/modal-forma-pagamento/modal-forma-pagamento.component'
+import { StorageServiceModule } from 'ngx-webstorage-service';
 
 @NgModule({
   declarations: [
@@ -35,6 +36,7 @@ import { RecargaService } from './modal/modal-recarga/shared/recarga.service';
     ModalAberturaCaixaComponent,
     ModalFechamentoCaixaComponent,
     ModalIdentificaClienteComponent,
+    ModalFormaPagamentoComponent,
 
   ],
   imports: [
@@ -43,8 +45,12 @@ import { RecargaService } from './modal/modal-recarga/shared/recarga.service';
     FormsModule,
     TextMaskModule,
     HttpClientModule,
+    StorageServiceModule ,
+
   ],
-  providers: [],
+  providers: [
+
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
