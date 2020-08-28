@@ -3,26 +3,38 @@
         <div class="col-7 bg-light border-right mt-2" id="sidebar-wrapper">
             <div class="sidebar-heading"></div>
             <div class="list-group list-group-flush">
-                <a href="#" class="list-group-item list-group-item-action bg-light">1x LAXANTE - PALMOLIVE
-                    R$ 29,87 </a>
-                <a href="#" class="list-group-item list-group-item-action bg-light"> </a>
+                <table>
+                    <tr class="row">
+                        <td class="col-2">QTD</td>
+                        <td class="col-8">Produto</td>
+                        <td class="col-2">Valor</td>
+                    </tr>
+                    <tr class="row" *ngFor="let produtos of listaDeProdutos" style="font-size: 15px;">
+                        <td class="col-2" style="text-align: center;">{{produtos.qtdProduto}} X</td>
+                        <td class="col-8" >{{produtos.descricaoProduto}}</td>
+                        <td class="col-2">R$ {{produtos.valorProduto}}</td>
+                    </tr>
+                </table>
+            </div>
+            <div>
                 <div class="container items-flex">
                     <!-- LETRAS EM CIMA DOS BOTÕES -->
                     <form id="vendaTop">
                         <div class="row">
                             <div class="col">
                                 <label for="qtd-item">QTD ITEM</label>
-                                <input type="number" class="form-control valoresPagamento" id="qtd-item" readonly>
+                                <p type="number" class="form-control valoresPagamento" id="qtd-item" style="color: white;" readonly>{{qtdTotal}}</p>
                             </div>
                             <div class="col">
 
                                 <label for="desconto">DESCONTO</label>
-                                <input type="number" class="form-control valoresPagamento" id="desconto" readonly>
+                                <input type="number" class="form-control valoresPagamento" id="desconto" readonly value="{{desconto}}"  style="color: white; text-align: center;">  
 
                             </div>
                             <div class="col">
                                 <label for="total">TOTAL</label>
-                                <input type="number" class="form-control valoresPagamento" id="total" readonly>
+                                <p type="number" class="form-control valoresPagamento" id="total" style="color: white;"  readonly>  {{total | currency}} </p>
+                                
                             </div>
                         </div>
                     </form>
@@ -31,17 +43,31 @@
         </div>
 
         <!-- BODY DO LADO -->
-        <div class="container mt-2 ml-1" style="background-color: white;">
-            <div class="col-12 ">
-                <label for="codProduto">CÓDIGO DO PRODUTO</label>
-                <input type="text" class="form-control" id="codProduto" onkeyup="validaNumero(this)" maxlength="13">
+        <div class="container mt-2 ml-1" style="background-color: white; font-size: 14px;">
+            <div class="col-12 row">
+                <div class="col-6">
+                    <label for="cdProduto">CÓDIGO DO PRODUTO</label>
+                    <input type="text" [(ngModel)]="id" class="form-control" id="cdProduto" name="cdProduto">
+                </div>
+                <div class="col-6">
+                    <label>Digite a quantidade</label>
+                    <input type="number" [(ngModel)]="quantidade" class="form-control" id="qtdProdutos"
+                        name="qtdProdutos">
+                </div>
+            </div>
+            <div style="margin-left: 137px;">
+                <button (click)="buscarProduto()">Confirmar produto</button>
+            </div>
+            <div>
                 <div class="items-flex">
                     <div class="ml mt-5">
                         <label>Operador: </label>
 
-                        <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#">CANCELAR</button>
+                        <button type="button" class="btn btn-danger" data-toggle="modal"
+                            data-target="#">CANCELAR</button>
 
-                        <button type="button" class="btn btn-success" data-toggle="modal" data-target="#formasPagamento">CONFIRMAR</button>
+                        <button type="button" class="btn btn-success" data-toggle="modal"
+                            data-target="#formasPagamento">CONFIRMAR</button>
 
                         <input type="text" class="form-control" id="codProduto" placeholder="CPF" readonly>
                     </div>
