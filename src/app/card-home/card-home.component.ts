@@ -16,7 +16,6 @@ export class CardHomeComponent implements OnInit {
 
 
 
-
   // card: Cards[] = [
   //   {
   //     cardTitle: "RECARREGUE JÁ",

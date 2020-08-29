@@ -94,8 +94,16 @@ body {
     display: inline-flex;
     justify-content: space-between;
     align-items: flex-end;
-    height: 60vh;
+    /* height: 60vh; */
     text-align: center;
+}
+
+#bodyLado .items-flex{
+  display: inline-flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  height: 320px;
+  text-align: center;
 }
 
 .valoresPagamento {
@@ -191,15 +199,6 @@ body {
     font-weight: bold;
 }
 
-.bottonRealizadoSucesso .confirmar {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 470px;
-    height: 50px;
-    font-weight: bold;
-}
-
 .bottonRealizadoCupom a {
     justify-content: center;
     width: 450px;
@@ -228,4 +227,19 @@ input {
     font-size: 16px;
     margin-top: -43px;
     color: #595959;
+}
+
+#listaProdutos{
+  height: 350px;
+  overflow:auto;
+}
+
+.tamanhoText {
+  text-align: left;
+  font-size: 22px;
+}
+
+.arrumaData {
+  display: flex;
+  justify-content: space-around;
 }

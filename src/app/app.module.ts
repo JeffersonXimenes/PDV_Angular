@@ -19,9 +19,11 @@ import { ModalRecargaComponent } from './modal/modal-recarga/modal-recarga-celul
 import { ModalAberturaCaixaComponent } from './modal/modal-abertura-caixa/modal-abertura-caixa.component';
 import { ModalFechamentoCaixaComponent } from './modal/modal-fechamento-caixa/modal-fechamento-caixa.component';
 import { ModalIdentificaClienteComponent } from './modal/modal-identifica-cliente/modal-identifica-cliente.component';
-import { RecargaService } from './modal/modal-recarga/shared/recarga.service';
+
 import { ModalFormaPagamentoComponent } from './modal/modal-forma-pagamento/modal-forma-pagamento.component'
 import { StorageServiceModule } from 'ngx-webstorage-service';
+import { RecargaService } from './modal/modal-recarga/shared/recarga.service';
+
 
 @NgModule({
   declarations: [

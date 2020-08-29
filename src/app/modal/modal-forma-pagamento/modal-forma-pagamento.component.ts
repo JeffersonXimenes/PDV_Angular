@@ -4,6 +4,7 @@ import { Component, OnInit, Inject } from '@angular/core';
 import { Router } from '@angular/router'
 
 import { Injectable } from '@angular/core';
+import { JsonPipe } from '@angular/common';
 
 @Component({
   selector: 'app-modal-forma-pagamento',
@@ -14,12 +15,11 @@ export class ModalFormaPagamentoComponent implements OnInit {
 
   // responseFilial: ResponseFilial[];
 
-  filial = JSON.parse(localStorage['filial'])
-  // request: any;
-  // sidebarComponent : SidebarComponent
+  filial = JSON.parse(localStorage['filial']);
+  produto = JSON.parse(localStorage['produto']);
 
   constructor() {  }
-  // private filialService: FilialService dentro do construtor
+
   ngOnInit(): void {
 
     // const meuDados = JSON.parse(localStorage.getItem('nmFilial'));
