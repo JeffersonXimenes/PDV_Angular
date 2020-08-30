@@ -31,8 +31,15 @@ export class ModalRecargaComponent implements OnInit {
     },
     dataAbertura: "",
     dataFechamento: "",
+    valorDocumento: null,
     flagNota: 1,
     numeroCaixa: 1
+  }
+
+  validar: any = {
+
+    numeroTelefone : ""
+
   }
 
   responseRecargas : ResponseRecargas[];
@@ -51,12 +58,12 @@ export class ModalRecargaComponent implements OnInit {
 
   register() : void {
     if(this.formRecarga.form.valid) {
-      alert("RECARGA REALIZADA COM SUCESSO!")
+      alert("Recarga realizada com sucesso!")
       console.log(this.request)
       this.recargaService.postRecarga(this.request).subscribe();
       //this.router.navigate(["/"]);
     } else {
-      alert("RECARGA NÃO REALIZADA! VERIFIQUE OS CAMPOS")
+      alert("Recarga não realizada! Verifique os campos.")
     }
   }
 
@@ -66,7 +73,7 @@ export class ModalRecargaComponent implements OnInit {
     console.log(this.responseRecargas)
   }
 
-  public validaNumero = ['(','0', /[1-9]/, /[1-9]/,')','9',/[1-9]/, /[1-9]/, /[1-9]/, /[1-9]/, '-', /[1-9]/, /[1-9]/,/[1-9]/,/[1-9]/]
+  public validaNumero = ['(','0', /[0-9]/, /[0-9]/,')','9',/[0-9]/, /[0-9]/, /[0-9]/, /[0-9]/, '-', /[0-9]/, /[0-9]/,/[0-9]/,/[0-9]/]
   public numero = [/[1-9]/, /[1-9]/,'/', /[0-9]/, /[1-9]/]
 }
 

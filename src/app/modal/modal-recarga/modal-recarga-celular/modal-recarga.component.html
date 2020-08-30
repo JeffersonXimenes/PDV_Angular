@@ -17,10 +17,10 @@
                             <div class="col-md-6">
                                 <label for="formGroupExampleInput">OPERADORA</label>
                                 <select class="form-control" [(ngModel)]="request.recarga.operadora.idOperadora" id="idOperadora" name="idOperadora" style="height: 47px; margin-top: 2px;" required>
-                                  <option class="form-control" value="1">VIVO</option>
-                                  <option class="form-control" value="2" >OI</option>
+                                  <option class="form-control" *ngFor="let recarga of responseRecargas"[ngValue]="recarga.idOperadora" value="recarga.IdOperadora" >{{ recarga.descricaoOperadora }}</option>
+                                  <!-- <option class="form-control" value="2" >OI</option>
                                   <option class="form-control" value="3" >TIM</option>
-                                  <option class="form-control" value="4" >CLARO</option>
+                                  <option class="form-control" value="4" >CLARO</option> -->
                                   {{ request.recarga.operadora.idOperadora | number }}
 
                                 </select>
@@ -29,19 +29,20 @@
                             </div>
                             <div class="col-md-6">
                                 <label for="formGroupExampleInput">VALOR(R$)</label>
-                                <input type="text" class="form-control" [(ngModel)]="request.recarga.valorRecarga" name="valorRecarga" id="valorRecarga" placeholder="R$ 0,00">
-                            </div>
+                                <input type="text" class="form-control" [(ngModel)]="request.recarga.valorRecarga"  name="valorRecarga" id="valorRecarga" placeholder="R$ 0,00">
+
+                              </div>
 
                         </div>
                         <div class="row">
                             <div class="col-md-6">
                                 <label for="formGroupExampleInput">NÚMERO</label>
-                                <input type="text" class="form-control"  [textMask]="{mask: validaNumero}" [(ngModel)]="request.recarga.numeroTelefone" name="numeroTelefone" id="numeroTelefone" placeholder="(0XX)9XXXX-XXXX" required>
+                                <input type="text" class="form-control"  [textMask]="{mask: validaNumero}" [(ngModel)]="request.recarga.numeroTelefone"  name="numeroTelefone" id="numeroTelefone" placeholder="(0XX)9XXXX-XXXX" required>
                                 <!-- [textMask]="{mask: validaNumero}" -->
                             </div>
                             <div class=" col-md-6 ">
                                 <label for="formGroupExampleInput ">CONFIRMAÇÃO</label>
-                                <input type="text" class="form-control" [textMask]="{mask: validaNumero}"  placeholder="(0XX)9XXXX-XXXX" required>
+                                <input type="text" class="form-control" [textMask]="{mask: validaNumero}"  [(ngModel)]="validar.numeroTelefone" name="numeroTelefone" id="numeroTelefone" placeholder="(0XX)9XXXX-XXXX" required>
                                 <!-- [textMask]="{mask: validaNumero}" -->
                             </div>
                         </div>
@@ -50,7 +51,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" routerLink="/" class="btn btn-danger" data-dismiss="modal" id="btnCancelarPagamento ">CANCELAR</button>
-                <a class="btn btn-success" data-dismiss="modal" data-toggle="modal" href="#modalCupom">CONFIRMAR</a>
+                <a *ngIf="request.recarga.numeroTelefone == validar.numeroTelefone" class="btn btn-success" data-dismiss="modal" data-toggle="modal" href="#modalCupom">PRÓXIMO</a>
             </div>
         </div>
     </div>
@@ -67,7 +68,7 @@
             <div class="row ">
                 <div class="col-md-6 " style="text-align: center ">
                     <label for="formGroupExampleInput ">OPERADORA</label>
-                    <p><strong>{{ request.recarga.operadora.idOperadora}}</strong></p>
+                    <p><strong>{{ request.recarga.operadora.idOperadora }}</strong></p>
                 </div>
                 <div class="col-md-6 " style="text-align: center; ">
                     <label for="formGroupExampleInput ">VALOR</label>
@@ -76,7 +77,7 @@
             </div>
             <div class="row ">
                 <div class="col-md " style="text-align: center ">
-                    <label for="formGroupExampleInput ">Numero</label>
+                    <label for="formGroupExampleInput ">NÚMERO</label>
                     <p><strong>{{request.recarga.numeroTelefone}}</strong></p>
                 </div>
             </div>

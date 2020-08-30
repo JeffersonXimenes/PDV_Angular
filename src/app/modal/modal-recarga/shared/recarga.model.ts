@@ -15,6 +15,7 @@ export interface Recarga {
   },
   dataAbertura: string,
   dataFechamento: string,
+  valorDocumento: string,
   flagNota: number,
   numeroCaixa: number,
 }
