@@ -51,7 +51,6 @@ export class VendaComponent implements OnInit {
     console.log(this.listaDeProdutos);
     this.total += (this.request.valorProduto * this.quantidade);
     this.qtdTotal += (this.quantidade);
-
     this.addItensNota();
 
   }
@@ -79,30 +78,31 @@ export class VendaComponent implements OnInit {
 
   //Função para adicionar as informações do documento fiscal
   registrarDocFiscal() {
-    console.log(this.retorno);
-    //this.docFiscaService.createDocFiscal(this.retorno).subscribe()
+    let retorno: DocFiscal = {
+      operacao: {
+        cdOperacao: 4
+      },
+      filial: {
+        cdFilial: this.filial.cdFilial
+      },
+      cliente: {
+        idCliente: 5
+      },
+  
+      dataAbertura: "",
+      dataFechamento: "",
+      flagNota: 1,
+      valorDocumento: this.total,
+      numeroCaixa: 1,
+      itens: this.listaItensNota
+    }
+    console.log(retorno);
+    this.docFiscaService.createDocFiscal(retorno).subscribe()
 
   }
 
   //Formato do json a ser mandado para API
-  retorno: DocFiscal = {
-    operacao: {
-      cdOperacao: 4
-    },
-    filial: {
-      cdFilial: this.filial.cdFilial
-    },
-    cliente: {
-      idCliente: 5
-    },
-
-    dataAbertura: "",
-    dataFechamento: "",
-    flagNota: 1,
-    valorDocumento: this.total,
-    numeroCaixa: 1,
-    itens: this.listaItensNota
-  }
+  
 
 } //Final do component
 
