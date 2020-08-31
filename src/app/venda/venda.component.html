@@ -44,7 +44,7 @@
             <div class="col-12 row">
                 <div class="col-6">
                     <label for="cdProduto">CÓDIGO DO PRODUTO</label>
-                    <input type="text" [(ngModel)]="id" class="form-control" id="cdProduto" name="cdProduto">
+                    <input type="text" [(ngModel)]="cdProduto" class="form-control" id="cdProduto" name="cdProduto">
                 </div>
                 <div class="col-6">
                     <label>Digite a quantidade</label>
@@ -118,11 +118,11 @@
 
                         <div class="form-group">
                             <label for="formGroupExampleInput">RECEBIDO</label>
-                            <input type="text" class="form-control" id="recebido" [(ngModel)]="recebido" (blur)="calcularTroco()">
+                            <input type="text" class="form-control" name="recebido" id="recebido" [(ngModel)]="recebido" (blur)="calcularTroco()">
                         </div>
                         <div class="form-group">
                             <label for="formGroupExampleInput">TROCO</label>
-                            <input type="number" class="form-control" id="troco" cols="63" [(ngModel)]="troco" readonly>
+                            <input type="number" class="form-control" id="troco" name="troco" cols="63" [(ngModel)]="troco" readonly>
                             <!-- <textarea name="aaaaa" id="troco" cols="63" disabled style="height: 38px; resize: none;"></textarea> -->
 
                             <!-- <input type="number" name="aaaaa" id="troco" cols="63" disabled style="height: 45px; resize: none;"> -->
@@ -156,7 +156,7 @@
             </div>
 
             <div class="modal-footer bottonRealizadoSucesso ">
-                <a class="btn btn-success" data-dismiss="modal" data-toggle="modal" href="#modalCupomImpresso">VENDA REALIZADA COM SUCESSO</a>
+                <a class="btn btn-success" data-dismiss="modal" data-toggle="modal" (click)="registrarDocFiscal()" href="#modalCupomImpresso">VENDA REALIZADA COM SUCESSO</a>
             </div>
         </div>
     </div>
