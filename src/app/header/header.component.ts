@@ -9,13 +9,14 @@ export class HeaderComponent implements OnInit {
 
   constructor() { }
 
+  operador = JSON.parse(localStorage['operador']);
 
   imagens = {
     img: "/Users/Treinamento/Documents/PDV/static/img/logo.png"
   }
 
   imgUrl = "/Users/Treinamento/Documents/PDV/static/img/logo.png"
-  
+
   ngOnInit(): void {
   }
 
