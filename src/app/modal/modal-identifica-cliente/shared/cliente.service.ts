@@ -13,7 +13,7 @@ export class ClienteService {
 
   constructor(private http: HttpClient) {}
 
-  private readonly API = 'http://localhost:8080/pdv/clientes';
+  private readonly API = 'http://localhost:8080/pdv/Cliente';
   private readonly APICPF = 'http://localhost:8080/pdv/cliente'
 
 

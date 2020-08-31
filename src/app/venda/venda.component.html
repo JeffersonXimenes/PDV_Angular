@@ -44,10 +44,10 @@
             <div class="col-12 row">
                 <div class="col-6">
                     <label for="cdProduto">CÓDIGO DO PRODUTO</label>
-                    <input type="text" [(ngModel)]="id" class="form-control" id="cdProduto" name="cdProduto">
+                    <input type="text" [(ngModel)]="cdProduto" class="form-control" id="cdProduto" name="cdProduto">
                 </div>
                 <div class="col-6">
-                    <label>Digite a quantidade</label>
+                    <label>DIGITE A QUANTIDADE</label>
                     <input type="number" [(ngModel)]="quantidade" class="form-control" id="qtdProdutos" name="qtdProdutos">
                 </div>
             </div>
@@ -57,13 +57,12 @@
             <div>
                 <div class="items-flex">
                     <div class="ml mt-5">
-                        <label>Operador: </label>
 
                         <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#">CANCELAR</button>
 
                         <button type="button" class="btn btn-success" data-toggle="modal"  data-target="#formasPagamento">CONFIRMAR</button>
 
-                        <input type="text" class="form-control" id="codProduto" placeholder="CPF" readonly>
+                        <input type="text" mask="000.000.000-00" [(ngModel)]="cliente.numeroCpf"  class="form-control" id="codProduto" placeholder="CPF" readonly>
                     </div>
                 </div>
             </div>
@@ -118,11 +117,11 @@
 
                         <div class="form-group">
                             <label for="formGroupExampleInput">RECEBIDO</label>
-                            <input type="text" class="form-control" id="recebido" [(ngModel)]="recebido" (blur)="calcularTroco()">
+                            <input type="text" class="form-control" name="recebido" id="recebido" [(ngModel)]="recebido" (blur)="calcularTroco()">
                         </div>
                         <div class="form-group">
                             <label for="formGroupExampleInput">TROCO</label>
-                            <input type="number" class="form-control" id="troco" cols="63" [(ngModel)]="troco" readonly>
+                            <input type="number" class="form-control" id="troco" name="troco" cols="63" [(ngModel)]="troco" readonly>
                             <!-- <textarea name="aaaaa" id="troco" cols="63" disabled style="height: 38px; resize: none;"></textarea> -->
 
                             <!-- <input type="number" name="aaaaa" id="troco" cols="63" disabled style="height: 45px; resize: none;"> -->
@@ -135,7 +134,7 @@
             <div class="modal-footer btn_formaPagamento">
                 <a class="btn btn-danger" id="btnCancelarPagamento"  data-dismiss="modal" data-toggle="modal" href="#formasPagamento">CANCELAR</a>
 
-                <a class="btn btn-success" data-dismiss="modal" data-toggle="modal" href="#modalCupom">CONFIRMAR</a>
+                <button *ngIf="total <= recebido" class="btn btn-success" data-dismiss="modal" data-toggle="modal" href="#modalCupom">CONFIRMAR</button>
             </div>
         </div>
     </div>
@@ -156,7 +155,7 @@
             </div>
 
             <div class="modal-footer bottonRealizadoSucesso ">
-                <a class="btn btn-success" data-dismiss="modal" data-toggle="modal" href="#modalCupomImpresso">VENDA REALIZADA COM SUCESSO</a>
+                <a class="btn btn-success" data-dismiss="modal" data-toggle="modal" (click)="registrarDocFiscal()" href="#modalCupomImpresso">VENDA REALIZADA COM SUCESSO</a>
             </div>
         </div>
     </div>
@@ -209,7 +208,7 @@
 
             <div class="modal-footer">
                 <a class="btn btn-danger" data-dismiss="modal" data-toggle="modal" href="#modalCupomImpresso">CANCELAR</a>
-                <a class="btn btn-success" data-dismiss="modal" data-toggle="modal" href="#modalCupomEnviado">CONFIRMAR</a>
+                <button class="btn btn-success" data-dismiss="modal" data-toggle="modal" routerLink="/home">CONFIRMAR</button>
             </div>
         </div>
     </div>
@@ -264,9 +263,7 @@
 
                         <li style="text-align: left;">{{ produto.qtdProduto }}x {{ produto.descricaoProduto }}</li>
                         <li>{{ produto.valorProduto | currency:'BRL' }}</li>
-                        <!-- <div>{{ produto.qtdProduto }}x</div>
-                        <div>{{ produto.descricaoProduto }}</div>
-                        <div>{{ produto.valorProduto | currency:'BRL' }}</div> -->
+
                     </div>
 
                     <!-- INFORMAÇÕES VALOR  -->
@@ -283,6 +280,14 @@
                         <div class=" "><strong>TOTAL</strong></div>
                         <div class=" "><strong>{{total | currency: 'BRL'}}</strong></div>
                     </div>
+                    <div class="modal-footer">
+                        <div class=" "><strong>VALOR RECEBIDO</strong></div>
+                        <div class=" "><strong>{{ recebido | currency: 'BRL'}}</strong></div>
+                    </div>
+                    <div class="modal-footer">
+                        <div class=" "><strong>TROCO</strong></div>
+                        <div class=" "><strong>{{ troco | currency: 'BRL'}}</strong></div>
+                    </div>
 
                     <!-- OBSERVAÇÕES CONTRIBUINTE -->
                     <hr>
@@ -294,8 +299,8 @@
                     <!-- FORMA PAGAMENTO  -->
                     <div class="modal-footer">
                         <div class=" ">Forma de Pagamento: DINHEIRO</div>
-                        <div class=" ">Valor {{total | currency: 'BRL'}}</div>
-                    </div>
+                        <div class=" ">Valor Total{{ total | currency: 'BRL'}}</div>
+                      </div>
                 </div>
             </div>
         </div>

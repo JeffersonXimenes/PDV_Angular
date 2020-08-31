@@ -7,5 +7,5 @@ export interface Produto {
 
 
 export interface ResponseProduto {
-    produto: Produto[];
+    produto: Produto[]
 }
