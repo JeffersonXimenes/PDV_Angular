@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Routes, Router } from '@angular/router';
+import { NgForm } from '@angular/forms';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Cards } from './card.models';
 import { Identifiers } from '@angular/compiler';
 
@@ -9,50 +11,28 @@ import { Identifiers } from '@angular/compiler';
 })
 export class CardHomeComponent implements OnInit {
 
-  constructor() { }
+@ViewChild('formValidarCard', {static: true}) formValidarCard : NgForm
+
+  constructor(private router : Router) { }
 
   ngOnInit(): void {
   }
 
+  validarCard(rota : string) {
+    if(localStorage.getItem('operador') == null) {
+      alert("Função habilitada apenas com operador logado!")
+      //this.router.navigate([`/home`]);
+    } else {
+        if (rota == 'recarga'){
+        this.router.navigate(['recarga'])
+      } if (rota == 'identificaCliente') {
+        this.router.navigate(['identificaCliente'])
+      } if (rota == 'saidaOperador') {
+        this.router.navigate(['saidaOperador'])
+      }
+    }
+  }
 
-
-  // card: Cards[] = [
-  //   {
-  //     cardTitle: "RECARREGUE JÁ",
-  //     cardText: "Recarga de Celular",
-  //     cardTitle2: "MÍNIMO",
-  //     cardTitle3: "R$ 20,00"
-  //   },
-  //   {
-  //     cardTitle: "BORA TRABALHAR",
-  //     cardText: "Abertura de Caixa",
-  //     cardTitle2: "",
-  //     cardTitle3: ""
-  //   },
-  //   {
-  //     cardTitle: "DESCANSO",
-  //     cardText: "Fechamento de Caixa",
-  //     cardTitle2: "",
-  //     cardTitle3: ""
-  //   }
-  // ]
-
-
-  // card2: Cards[] = [
-  //   {
-  //     cardTitle: "CLIENTE DROGASIL",
-  //     cardText: "Identifica Cliente",
-  //     cardTitle2: "DESCONTOS DE ATÉ",
-  //     cardTitle3: "R$ 10,00"
-  //   },
-  //   {
-
-  //     cardTitle: "É DIA DE QUEM?",
-  //     cardText: "Entrada de Operador",
-  //     cardTitle2: "",
-  //     cardTitle3: ""
-  //   }
-  // ]
 
 }
 

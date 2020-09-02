@@ -12,13 +12,13 @@
             <div class="modal-body">
                 <form id="sla">
                     <div class="form-group">
-                        <label class="consertaModal">CONFIRMAR A ABERTURA DO DIA 30/08/2020</label>
+                        <label class="consertaModal">CONFIRMAR A ABERTURA DO DIA {{ formatUser }}</label>
                     </div>
                 </form>
             </div>
             <div class="modal-footer consertaModalBotton ">
                 <button type="button" class="btn btn-danger" data-dismiss="modal" id="Btncancelar" routerLink="">CANCELAR</button>
-                <button type="button" class="btn btn-success" data-dismiss="modal" id="btnConfirmarAbertura" routerLink="">CONFIRMAR</button>
+                <button type="button" class="btn btn-success" data-dismiss="modal" (click)="dataAbertura()" routerLink="">CONFIRMAR</button>
             </div>
         </div>
     </div>

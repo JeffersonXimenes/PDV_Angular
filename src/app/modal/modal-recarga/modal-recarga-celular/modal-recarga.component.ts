@@ -27,6 +27,7 @@ export class ModalRecargaComponent implements OnInit {
       valorRecarga: null,
       operadora : {
         idOperadora: null,
+        descricaoOperadora : '',
       }
     },
     dataAbertura: "",
@@ -37,9 +38,7 @@ export class ModalRecargaComponent implements OnInit {
   }
 
   validar: any = {
-
     numeroTelefone : ""
-
   }
 
   responseRecargas : ResponseRecargas[];
@@ -73,7 +72,7 @@ export class ModalRecargaComponent implements OnInit {
     console.log(this.responseRecargas)
   }
 
-  public validaNumero = ['(','0', /[0-9]/, /[0-9]/,')','9',/[0-9]/, /[0-9]/, /[0-9]/, /[0-9]/, '-', /[0-9]/, /[0-9]/,/[0-9]/,/[0-9]/]
-  public numero = [/[1-9]/, /[1-9]/,'/', /[0-9]/, /[1-9]/]
+  //public validaNumero = ['(','0', /[0-9]/, /[0-9]/,')','9',/[0-9]/, /[0-9]/, /[0-9]/, /[0-9]/, '-', /[0-9]/, /[0-9]/,/[0-9]/,/[0-9]/]
+  //public numero = [/[1-9]/, /[1-9]/,'/', /[0-9]/, /[1-9]/]
 }
 

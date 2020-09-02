@@ -15,7 +15,7 @@ export class RecargaService {
   private readonly getRecarga = 'http://localhost:8080/pdv/operadoras';
 
 
-  postRecarga(request: Recarga): Observable<Recarga> {
+  postRecarga(request: Recarga) : Observable<Recarga> {
     return this.http.post<Recarga>(this.API, request);
   }
 

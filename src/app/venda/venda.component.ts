@@ -40,7 +40,10 @@ export class VendaComponent implements OnInit {
   //Função para buscar o produto leo código no banco de dados
   buscarProduto() {
     this.produtoService.getProduto(this.cdProduto).subscribe(response => {
-      this.request = response; this.addProdutoLista(); console.log(this.request.cdProduto);
+      this.request = response; this.addProdutoLista(); console.log(this.request);
+      if (this.request == null) {
+        alert("Produto não existe!")
+      }
       let produto = localStorage['produto'] = JSON.stringify(this.listaDeProdutos);
     });
   }

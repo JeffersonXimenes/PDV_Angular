@@ -10,7 +10,7 @@ import { Cliente } from './shared/cliente.model';
 export class ModalIdentificaClienteComponent implements OnInit {
 
   request : Cliente = {
-    idCliente : 60,
+    idCliente : 0,
     numeroCpf : '',
     email: '',
     idCategoriaCliente: 1,

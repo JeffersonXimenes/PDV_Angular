@@ -37,12 +37,12 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <label for="formGroupExampleInput">NÚMERO</label>
-                                <input type="text" class="form-control"  [textMask]="{mask: validaNumero}" [(ngModel)]="request.recarga.numeroTelefone"  name="numeroTelefone" id="numeroTelefone" placeholder="(0XX)9XXXX-XXXX" required>
+                                <input type="text" class="form-control"  [(ngModel)]="request.recarga.numeroTelefone"  name="numeroTelefone" id="numeroTelefone" placeholder="(0XX)9XXXX-XXXX" required>
                                 <!-- [textMask]="{mask: validaNumero}" -->
                             </div>
                             <div class=" col-md-6 ">
                                 <label for="formGroupExampleInput ">CONFIRMAÇÃO</label>
-                                <input type="text" class="form-control" [textMask]="{mask: validaNumero}"  [(ngModel)]="validar.numeroTelefone" name="numeroTelefone" id="numeroTelefone" placeholder="(0XX)9XXXX-XXXX" required>
+                                <input type="text" class="form-control"  [(ngModel)]="validar.numeroTelefone" name="numeroTelefone" id="numeroTelefone" placeholder="(0XX)9XXXX-XXXX" required>
                                 <!-- [textMask]="{mask: validaNumero}" -->
                             </div>
                         </div>
@@ -68,7 +68,7 @@
             <div class="row ">
                 <div class="col-md-6 " style="text-align: center ">
                     <label for="formGroupExampleInput ">OPERADORA</label>
-                    <p><strong>{{ request.recarga.operadora.idOperadora }}</strong></p>
+                    <p><strong>{{ request.recarga.operadora.descricaoOperadora }}</strong></p>
                 </div>
                 <div class="col-md-6 " style="text-align: center; ">
                     <label for="formGroupExampleInput ">VALOR</label>

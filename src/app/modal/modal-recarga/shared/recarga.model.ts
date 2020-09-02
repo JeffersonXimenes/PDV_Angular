@@ -10,7 +10,8 @@ export interface Recarga {
     numeroTelefone: string,
     valorRecarga: number,
     operadora : {
-      idOperadora: string
+      idOperadora: number,
+      descricaoOperadora : string,
     }
   },
   dataAbertura: string,

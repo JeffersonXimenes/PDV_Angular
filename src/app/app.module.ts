@@ -23,6 +23,9 @@ import { ModalIdentificaClienteComponent } from './modal/modal-identifica-client
 import { ModalFormaPagamentoComponent } from './modal/modal-forma-pagamento/modal-forma-pagamento.component'
 import { StorageServiceModule } from 'ngx-webstorage-service';
 import { NgxMaskModule } from 'ngx-mask';
+import { ModalSaidaOperadorComponent } from './modal-saida-operador/modal-saida-operador.component';
+import { AuthGuardService } from './guardRoute/auth-guard.service';
+
 
 @NgModule({
   declarations: [
@@ -38,6 +41,7 @@ import { NgxMaskModule } from 'ngx-mask';
     ModalFechamentoCaixaComponent,
     ModalIdentificaClienteComponent,
     ModalFormaPagamentoComponent,
+    ModalSaidaOperadorComponent,
 
   ],
   imports: [
@@ -46,12 +50,13 @@ import { NgxMaskModule } from 'ngx-mask';
     FormsModule,
     TextMaskModule,
     HttpClientModule,
-    StorageServiceModule ,
+    StorageServiceModule,
+
     NgxMaskModule.forRoot(),
 
   ],
   providers: [
-
+    AuthGuardService,
   ],
   bootstrap: [AppComponent]
 })

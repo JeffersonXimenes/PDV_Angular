@@ -8,16 +8,11 @@ import { Component, OnInit } from '@angular/core';
 export class HeaderComponent implements OnInit {
 
   constructor() { }
-
-  operador = JSON.parse(localStorage['operador']);
-
-  imagens = {
-    img: "/Users/Treinamento/Documents/PDV/static/img/logo.png"
-  }
+  operador : any
 
   imgUrl = "/Users/Treinamento/Documents/PDV/static/img/logo.png"
 
   ngOnInit(): void {
+    this.operador = JSON.parse(localStorage['operador']);
   }
-
 }
