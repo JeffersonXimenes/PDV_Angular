@@ -15,7 +15,7 @@ export class FilialService {
       return JSON.parse(localStorage.getItem(key));
     }
 
-    private readonly API = 'http://localhost:8080/filial/';
+    private readonly API = 'http://localhost:8080/filial';
 
     getFilial(cdFilial: number): Observable<ResponseFilial> {
         const URL = `${this.API}/${cdFilial}`;

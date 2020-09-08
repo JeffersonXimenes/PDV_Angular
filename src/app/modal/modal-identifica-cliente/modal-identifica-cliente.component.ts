@@ -10,7 +10,7 @@ import { Cliente } from './shared/cliente.model';
 export class ModalIdentificaClienteComponent implements OnInit {
 
   request : Cliente = {
-    idCliente : 60,
+    idCliente : 0,
     numeroCpf : '',
     email: '',
     idCategoriaCliente: 1,
@@ -40,7 +40,6 @@ export class ModalIdentificaClienteComponent implements OnInit {
         if(this.respostaCliente.idCliente == null) {
           alert("Cliente não cadastrado!")
           this.registrarCliente();
-          let clienteNaoCadastrado = localStorage['clienteNAOCadastrado'] = JSON.stringify(this.respostaCliente)
         } else {
           alert("Cliente encontrado!")
           //response => {this.respostaCliente = response; console.log(this.request);console.log(this.respostaCliente)}

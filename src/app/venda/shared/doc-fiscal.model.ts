@@ -8,7 +8,8 @@ export interface DocFiscal{
     numeroCaixa: number,
     itens: any,
     dataAbertura: String,
-    dataFechamento: String
+    dataFechamento: String,
+    pagamentos: any
 }
 
 export interface DocFiscalResponse{
