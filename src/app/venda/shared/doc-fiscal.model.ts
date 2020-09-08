@@ -34,11 +34,12 @@ export interface Cliente{
 }
 
 export interface DocumentoItem{
-    
+
     numItemDoc: number,
     produto: Produto,
     qtdItem: number,
     valorItem: number,
+
     porcentoIcms: number,
     valorIcms: number;
 }

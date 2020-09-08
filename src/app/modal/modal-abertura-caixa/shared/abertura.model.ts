@@ -1,4 +1,11 @@
 export interface Abertura {
   dataAbertura : Date;
-  cdFilial : number;
+  dataFechamento : Date;
+  filial : {
+    cdFilial : number;
+  }
+  numeroCaixa : number;
+  operacao : {
+    cdOperacao : number
+  }
 }

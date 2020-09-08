@@ -51,12 +51,12 @@ import { AuthGuardService } from './guardRoute/auth-guard.service';
     TextMaskModule,
     HttpClientModule,
     StorageServiceModule,
-
     NgxMaskModule.forRoot(),
 
   ],
   providers: [
     AuthGuardService,
+    CardHomeComponent,
   ],
   bootstrap: [AppComponent]
 })

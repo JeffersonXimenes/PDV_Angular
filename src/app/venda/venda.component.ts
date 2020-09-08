@@ -4,6 +4,8 @@ import { DocFiscalService } from './shared/doc-fiscal.service'
 import { ResponseProduto, Produto } from './shared/produto.model';
 import { DocFiscal, DocumentoItem } from './shared/doc-fiscal.model';
 import { NgForm } from '@angular/forms';
+import { Global, FechamentoCaixa } from '../global';
+import { stringify } from 'querystring';
 
 @Component({
   selector: 'app-venda',
@@ -33,8 +35,13 @@ export class VendaComponent implements OnInit {
   recebido: number = 0;
   numItem: number = 0;
 
+  totaldeVendas : number = 0
+
+
   ngOnInit(): void {
     this.cliente = JSON.parse(localStorage['clienteCadastrado']);
+    this.totaldeVendas
+
   }
 
   //Função para buscar o produto leo código no banco de dados
@@ -80,7 +87,7 @@ export class VendaComponent implements OnInit {
   calcularTroco() {
     this.troco = this.recebido - this.total;
   }
-
+  vendas : Array<any> = [];
   //Função para adicionar as informações do documento fiscal
   registrarDocFiscal() {
     let retorno: DocFiscal = {
@@ -99,11 +106,22 @@ export class VendaComponent implements OnInit {
       flagNota: 1,
       valorDocumento: this.total,
       numeroCaixa: 1,
+
       itens: this.listaItensNota
+
     }
     console.log(retorno);
     this.docFiscaService.createDocFiscal(retorno).subscribe()
 
+    // ADICONEI ISSO
+    //this.totaldeVendas = this.totaldeVendas + retorno.valorDocumento
+
+    localStorage.vendas = JSON.stringify(retorno.valorDocumento)
+
+    FechamentoCaixa.totalFechamento.push(retorno.valorDocumento)
+    console.log(Global.totalFechamentoCaixa)
+
+    //console.log(this.totaldeVendas)
   }
 
   //Formato do json a ser mandado para API
