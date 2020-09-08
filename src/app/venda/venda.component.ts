@@ -16,15 +16,15 @@ export class VendaComponent implements OnInit {
 
   constructor(private produtoService: ProdutoService, private docFiscaService: DocFiscalService) { }
   cliente : any
-
   responseProduto: ResponseProduto[];
   docFiscal: DocFiscal;
   request: any;
   listaDeProdutos: Array<any> = [];
   listaItensNota: Array<any> = [];
   cdProduto: number;
-  quantidade: number;
+  quantidade: number = 1;
   total: number = 0;
+  totalGeral: number;
   qtdTotal: number = 0;
   desconto: number = 0;
   dinheiro: number = 0;
@@ -32,17 +32,31 @@ export class VendaComponent implements OnInit {
   troco: number = 0;
   recebido: number = 0;
   numItem: number = 0;
+  pagamentos: Array<Pagamento> = [];
 
   ngOnInit(): void {
     this.cliente = JSON.parse(localStorage['clienteCadastrado']);
+    console.log(this.cliente);
   }
 
   //Função para buscar o produto leo código no banco de dados
   buscarProduto() {
+
+    if(this.cdProduto == null || this.cdProduto <= 0){
+      alert("DIgite um código de produto válido");
+    }
+    else if(this.quantidade == null || this.quantidade < 1){
+      alert("Quantidade Inválida, insira um número maior que 0")
+    }
+    else{
     this.produtoService.getProduto(this.cdProduto).subscribe(response => {
-      this.request = response; this.addProdutoLista(); console.log(this.request.cdProduto);
+      this.request = response; this.addProdutoLista();
+      if (this.request == null) {
+        alert("Produto não existe!")
+      }
       let produto = localStorage['produto'] = JSON.stringify(this.listaDeProdutos);
     });
+  }
   }
 
   //Função para adicionar um item a lista de produtos
@@ -50,10 +64,12 @@ export class VendaComponent implements OnInit {
     let item = new VendaItem(this.request.cdProduto, this.request.valorProduto,
       this.request.descricaoProduto, this.quantidade);
     this.listaDeProdutos.push(item);
-    console.log(this.listaDeProdutos);
     this.total += (this.request.valorProduto * this.quantidade);
+    this.totalGeral = this.total;
     this.qtdTotal += (this.quantidade);
     this.addItensNota();
+
+    this.quantidade = 1;
 
   }
 
@@ -67,10 +83,27 @@ export class VendaComponent implements OnInit {
     docItem.valorItem = (this.request.valorProduto * this.quantidade);
     docItem.numItemDoc = this.numItem + 1;
     this.listaItensNota.push(docItem);
-    console.log(this.listaItensNota);
     this.numItem++;
-    console.log(docItem.qtdItem);
 
+  }
+
+  addPagamento(formaPagamento: number, partePaga: number){
+    let pagto = new Pagamento();
+    let pagtoTipo = new TipoPagamento(formaPagamento);
+    pagto.tipoPagamento = pagtoTipo;
+
+    if (partePaga == 0){
+      pagto.vlPagamento = this.total;
+    }else if(partePaga == 1){
+      pagto.vlPagamento = this.recebido;
+    }
+    this.pagamentos.push(pagto);
+    this.total -= this.recebido;
+    console.log(this.pagamentos);
+  }
+
+  cancelarPagamentoCartao(){
+    this.pagamentos.pop();
   }
 
   //Função para calculo de troco
@@ -80,6 +113,7 @@ export class VendaComponent implements OnInit {
 
   //Função para adicionar as informações do documento fiscal
   registrarDocFiscal() {
+    //Formato do json a ser mandado para API
     let retorno: DocFiscal = {
       operacao: {
         cdOperacao: 4
@@ -94,21 +128,43 @@ export class VendaComponent implements OnInit {
       dataAbertura: "",
       dataFechamento: "",
       flagNota: 1,
-      valorDocumento: this.total,
+      valorDocumento: this.totalGeral,
       numeroCaixa: 1,
-      itens: this.listaItensNota
+      itens: this.listaItensNota,
+      pagamentos: this.pagamentos
     }
-    console.log(retorno);
+
+    localStorage.vendas = JSON.stringify(retorno.valorDocumento)
+    
     this.docFiscaService.createDocFiscal(retorno).subscribe()
+    console.log(retorno);
 
   }
 
-  //Formato do json a ser mandado para API
+  cancelarProduto(teste: any){
+    console.log(teste)
 
+    this.total = (this.total - this.listaDeProdutos[teste].valorProduto);
+    this.listaDeProdutos.splice(teste,1);
+    this.listaItensNota.splice(teste,1);
+    for(let i = 0; i < this.listaItensNota.length; i++){
+      this.listaItensNota[i].numItemDoc = i+1;
+      console.log(this.listaItensNota[i]);
+      this.numItem = i+1
+    }
+    console.log(this.listaItensNota);
+    console.log(this.listaDeProdutos);
+    // for(let i = 0; i <= this.listaDeProdutos.length; i++){
+    //   if(this.listaDeProdutos[i] == numeroItem){
+    //     this.listaDeProdutos.splice(i,1);
+    //   }
+    // }
+  }
 
-} //Final do component
+}
+//Final do component
 
-
+//Classes auxiliares
 class DocumentoFiscal {
   public idDocumentoFiscal: number;
   public operacao: number;
@@ -119,12 +175,7 @@ class DocumentoFiscal {
   public numeroCaixa: number;
   public itens: Array<DocItem> = [];
 
-  constructor() {
-
-  };
-  // constructor(public idDocumentoFiscal: number,public operacao: number, public filial: number,
-  //   public cliente: number, public flagNota: number, public valorDocumento: number
-  //   , public numeroCaixa: number, public itens: Array<DocItem>){}
+  constructor() {};
 
 }
 
@@ -133,7 +184,6 @@ class VendaItem {
     public valorProduto: number, public descricaoProduto: String,
     public qtdProduto: number) { }
 }
-
 
 class DocItem {
 
@@ -148,4 +198,15 @@ class DocItem {
 
 class DocItemProd {
   constructor(public cdProduto: number) { }
+}
+
+class Pagamento{
+  tipoPagamento: TipoPagamento;
+  vlPagamento: number ;
+  constructor(){}
+}
+
+class TipoPagamento{
+
+  constructor(public idTipoPagamento: number){}
 }

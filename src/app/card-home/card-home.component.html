@@ -1,8 +1,8 @@
 <!-- Cards de Ação Primeira Linha -->
 <div class="row menu" id="menu">
-    <!-- Card operador -->
-    <div class="col-sm-7 col-md-3">
-        <a routerLink="recarga" data-toggle="modal" data-target="#modalRecarga">
+    <!-- Card Recarga -->
+    <div class="col-sm-7 col-md-3" (click)="validarCard('recarga')">
+       <a data-toggle="modal" data-target="#modalRecarga">
             <div class="card tamanhoCard">
                 <div class="card-body">
                     <h5 class="card-title">RECARREGUE JÁ</h5>
@@ -12,7 +12,7 @@
                 </div>
             </div>
         </a>
-    </div>
+   </div>
     <!-- Card Abertura de Caixa -->
     <div class="col-sm-7 col-md-3">
         <a routerLink="aberturaCaixa" data-toggle="modal" data-target="#modalAbertura">
@@ -41,7 +41,7 @@
 <div class="row menu" id="menu_2">
     <!-- Card Identifica Cliente  -->
     <div class="col-sm-7 col-md-3">
-        <a routerLink="identificaCliente" data-toggle="modal" data-target="#modalCpf ">
+        <a (click)="validarCard('identificaCliente')" data-toggle="modal" data-target="#modalCpf">
             <div class="card tamanhoCard ">
                 <div class="card-body ">
                     <h5 class="card-title ">CLIENTE DROGASIL</h5>
@@ -57,10 +57,22 @@
         <a routerLink="operador" data-toggle="modal" data-target="#entradaOperador ">
             <div class="card tamanhoCard ">
                 <div class="card-body ">
-                    <h5 class="card-title ">É DIA DE QUEM?</h5>
+                   <h5 class="card-title ">É DIA DE QUEM?</h5>
                     <p class="card-text ">Entrada de Operador</p>
                 </div>
             </div>
         </a>
     </div>
+    <!-- Card Saída de Operador -->
+    <div class="col-sm-7 col-md-3 ">
+      <a data-toggle="modal" (click)="validarCard('saidaOperador')" data-target="#saidaOperador ">
+          <div class="card tamanhoCard ">
+              <div class="card-body ">
+                 <h5 class="card-title ">ISSO É UM ADEUS?</h5>
+                  <p class="card-text ">Saída de Operador</p>
+              </div>
+          </div>
+      </a>
+    </div>
+
 </div>

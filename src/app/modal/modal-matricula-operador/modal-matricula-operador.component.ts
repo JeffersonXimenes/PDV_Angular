@@ -29,10 +29,11 @@ export class ModalMatriculaOperadorComponent implements OnInit {
 
     this.operadorService.getOperador(this.nmMatricula).subscribe(
       response => {this.request = response; console.log(this.request);
-         let operador = localStorage ['operador'] = JSON.stringify(this.request);
-         if (this.request.numeroMatricula == null ) {
+
+        if (this.request.numeroMatricula == null ) {
           alert("Operador não encontrado!")
-        } else {
+        } if (this.request.idOperador && this.request.numeroMatricula != null) {
+          let operador = localStorage ['operador'] = JSON.stringify(this.request);
           location.reload()
           alert("Operador logado!")
         }});
