@@ -11,14 +11,19 @@ export interface Recarga {
     valorRecarga: number,
     operadora : {
       idOperadora: number,
-      descricaoOperadora : string,
     }
   },
   dataAbertura: string,
   dataFechamento: string,
-  valorDocumento: string,
+  valorDocumento: number,
   flagNota: number,
   numeroCaixa: number,
+  pagamentos:[{
+    tipoPagamento:{
+      idTipoPagamento: number,
+    },
+    vlPagamento: number
+  }]
 }
 
 export interface Operadora {

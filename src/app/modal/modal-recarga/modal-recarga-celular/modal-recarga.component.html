@@ -1,14 +1,15 @@
 <app-card-home></app-card-home>
 <!-- Modal recarga -->
-<div class="modal fade" id="modalRecarga" tabindex="-1" role="dialog" aria-labelledby="modalPagamentoLabel" aria-hidden="true">
+<div class="modal fade" id="modalRecarga" tabindex="-1" role="dialog" aria-labelledby="modalPagamentoLabel"
+    aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title consertModalTitleRecarga" id="modalPagamentoLabel">RECARGA DE CELULAR
                 </h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                  <span aria-hidden="true" routerLink=".." >&times;</span>
-              </button>
+                    <span aria-hidden="true" routerLink="..">&times;</span>
+                </button>
             </div>
             <div class="modal-body">
                 <form #formRecarga="ngForm" style="font-weight: bold; color: black; font-size: 20px;">
@@ -16,12 +17,11 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <label for="formGroupExampleInput">OPERADORA</label>
-                                <select class="form-control" [(ngModel)]="request.recarga.operadora.idOperadora" id="idOperadora" name="idOperadora" style="height: 47px; margin-top: 2px;" required>
-                                  <option class="form-control" *ngFor="let recarga of responseRecargas"[ngValue]="recarga.idOperadora" value="recarga.IdOperadora" >{{ recarga.descricaoOperadora }}</option>
-                                  <!-- <option class="form-control" value="2" >OI</option>
-                                  <option class="form-control" value="3" >TIM</option>
-                                  <option class="form-control" value="4" >CLARO</option> -->
-                                  {{ request.recarga.operadora.idOperadora | number }}
+                                <select class="form-control" [(ngModel)]="operadora" (blur)="escolhida()"
+                                    id="operadora" name="operadora" style="height: 47px; margin-top: 2px;" required>
+                                    <option class="form-control" *ngFor="let recarga of responseRecargas"
+                                        [ngValue]="recarga" value="recarga" >
+                                        {{ recarga.descricaoOperadora }}</option>
 
                                 </select>
 
@@ -29,20 +29,25 @@
                             </div>
                             <div class="col-md-6">
                                 <label for="formGroupExampleInput">VALOR(R$)</label>
-                                <input type="text" class="form-control" [(ngModel)]="request.recarga.valorRecarga"  name="valorRecarga" id="valorRecarga" placeholder="R$ 0,00">
+                                <input type="text" class="form-control" [(ngModel)]="valorRecarga"
+                                    name="valorRecarga" id="valorRecarga" placeholder="R$ 0,00">
 
-                              </div>
+                            </div>
 
                         </div>
                         <div class="row">
                             <div class="col-md-6">
                                 <label for="formGroupExampleInput">NÚMERO</label>
-                                <input type="text" class="form-control"  [(ngModel)]="request.recarga.numeroTelefone"  name="numeroTelefone" id="numeroTelefone" placeholder="(0XX)9XXXX-XXXX" required>
+                                <input type="text" class="form-control" [textMask]="{mask: validaNumero}"
+                                    [(ngModel)]="numeroTelefone" name="numeroTelefone"
+                                    id="numeroTelefone" placeholder="(0XX)9XXXX-XXXX" required>
                                 <!-- [textMask]="{mask: validaNumero}" -->
                             </div>
                             <div class=" col-md-6 ">
                                 <label for="formGroupExampleInput ">CONFIRMAÇÃO</label>
-                                <input type="text" class="form-control"  [(ngModel)]="validar.numeroTelefone" name="numeroTelefone" id="numeroTelefone" placeholder="(0XX)9XXXX-XXXX" required>
+                                <input type="text" class="form-control" [textMask]="{mask: validaNumero}"
+                                    [(ngModel)]="validar.numeroTelefone" name="numeroTelefone" id="numeroTelefone"
+                                    placeholder="(0XX)9XXXX-XXXX" required>
                                 <!-- [textMask]="{mask: validaNumero}" -->
                             </div>
                         </div>
@@ -50,75 +55,86 @@
                 </form>
             </div>
             <div class="modal-footer">
-                <button type="button" routerLink="/" class="btn btn-danger" data-dismiss="modal" id="btnCancelarPagamento ">CANCELAR</button>
-                <a *ngIf="request.recarga.numeroTelefone == validar.numeroTelefone" class="btn btn-success" data-dismiss="modal" data-toggle="modal" href="#modalCupom">PRÓXIMO</a>
+                <button type="button" routerLink="/" class="btn btn-danger" data-dismiss="modal"
+                    id="btnCancelarPagamento ">CANCELAR</button>
+                <a *ngIf="numeroTelefone == validar.numeroTelefone" class="btn btn-success"
+                    data-dismiss="modal" data-toggle="modal" href="#modalCupom">PRÓXIMO</a>
             </div>
         </div>
     </div>
 </div>
 
 <!-- Modal Confirmar Operadora-->
-<div class="modal fade" id="modalCupom" tabindex="-1 " role="dialog " aria-labelledby="modalCupomLabel" aria-hidden="true">
+<div class="modal fade" id="modalCupom" tabindex="-1 " role="dialog " aria-labelledby="modalCupomLabel"
+    aria-hidden="true">
     <div class=" modal-dialog modal-dialog-centered ">
         <div class="modal-content ">
             <div class="modal-header ">
-                <h5 class="modal-title consertModalTitleRecarga" id="modalCupomLabel" style="margin-left: 60px;">FORMA DE PAGAMENTO: DINHEIRO</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"> <span routerLink=".." aria-hidden="true">&times;</span></button>
+                <h5 class="modal-title consertModalTitleRecarga" id="modalCupomLabel" style="margin-left: 60px;">FORMA
+                    DE PAGAMENTO: DINHEIRO</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"> <span routerLink=".."
+                        aria-hidden="true">&times;</span></button>
             </div>
             <div class="row ">
                 <div class="col-md-6 " style="text-align: center ">
                     <label for="formGroupExampleInput ">OPERADORA</label>
-                    <p><strong>{{ request.recarga.operadora.descricaoOperadora }}</strong></p>
+                    <p><strong>{{ operadora.descricaoOperadora }}</strong></p>
                 </div>
                 <div class="col-md-6 " style="text-align: center; ">
                     <label for="formGroupExampleInput ">VALOR</label>
-                    <p><strong>{{ request.recarga.valorRecarga }}</strong></p>
+                    <p><strong>{{ valorRecarga }}</strong></p>
                 </div>
             </div>
             <div class="row ">
                 <div class="col-md " style="text-align: center ">
                     <label for="formGroupExampleInput ">NÚMERO</label>
-                    <p><strong>{{request.recarga.numeroTelefone}}</strong></p>
+                    <p><strong>{{numeroTelefone}}</strong></p>
                 </div>
             </div>
             <div class="modal-footer ">
-                <button type="button" class="btn btn-danger " data-dismiss="modal" routerLink="/" id="Btncancelar ">CANCELAR</button>
+                <button type="button" class="btn btn-danger " data-dismiss="modal" routerLink="/"
+                    id="Btncancelar ">CANCELAR</button>
                 <!-- CONFIRMAR O REGISTRO DA RECARGA-->
-                <button type="button" class="btn btn-success" data-dismiss="modal" data-toggle="modal" (click)="register()" href="#modalCupomImpresso" id="Btncancelar">CONFIRMAR</button>
+                <button type="button" class="btn btn-success" data-dismiss="modal" data-toggle="modal"
+                    (click)="register()" href="#modalCupomImpresso" id="Btncancelar">CONFIRMAR</button>
             </div>
         </div>
     </div>
 </div>
 
 <!-- Modal Imprimir Cupom-->
-<div class="modal fade" id="modalCupomImpresso" tabindex="-1 " role="dialog" aria-labelledby="modalCupomLabel" aria-hidden="true ">
+<div class="modal fade" id="modalCupomImpresso" tabindex="-1 " role="dialog" aria-labelledby="modalCupomLabel"
+    aria-hidden="true ">
     <div class="modal-dialog modal-dialog-centered ">
         <div class="modal-content ">
             <div class="modal-header ">
-                <h5 class="modal-title consertModalTitleRecarga" id="modalCupomImpressoLabel" style="margin-left: 60px;">FORMA DE PAGAMENTO: DINHEIRO</h5>
-                <button type="button " class="close" data-dismiss="modal" aria-label="Close"> <span aria-hidden="true" routerLink=".." >&times;</span></button>
+                <h5 class="modal-title consertModalTitleRecarga" id="modalCupomImpressoLabel"
+                    style="margin-left: 60px;">FORMA DE PAGAMENTO: DINHEIRO</h5>
+                <button type="button " class="close" data-dismiss="modal" aria-label="Close"> <span aria-hidden="true"
+                        routerLink="..">&times;</span></button>
             </div>
             <div class="row ">
                 <div class="col-md-6 " style="text-align: center ">
                     <label for="formGroupExampleInput ">OPERADORA</label>
                     <p>
-                      <strong>{{ request.recarga.operadora.idOperadora}}</strong>
+                        <strong>{{ operadora.descricaoOperadora}}</strong>
                     </p>
                 </div>
                 <div class="col-md-6 " style="text-align: center; ">
                     <label for="formGroupExampleInput ">VALOR</label>
-                    <p><strong>{{ request.recarga.valorRecarga }}</strong></p>
+                    <p><strong>{{ valorRecarga }}</strong></p>
                 </div>
             </div>
             <div class="row ">
                 <div class="col-md " style="text-align: center ">
                     <label for="formGroupExampleInput ">NÚMERO</label>
-                    <p><strong>{{request.recarga.numeroTelefone}}</strong></p>
+                    <p><strong>{{numeroTelefone}}</strong></p>
                 </div>
             </div>
             <div class="modal-footer bottonRealizadoSucesso ">
 
-                <button type="button" class="btn btn-success confirmar" data-dismiss="modal" data-toggle="modal" style="margin-left: 0px; width: 500px;" routerLink="/">PAGÍNA INICIAL</button>
+                <button type="button" class="btn btn-success confirmar" data-dismiss="modal" data-toggle="modal"
+                    style="margin-left: 0px; width: 500px;" routerLink="/">PAGÍNA INICIAL</button>
             </div>
         </div>
     </div>

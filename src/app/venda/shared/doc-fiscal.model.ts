@@ -8,7 +8,8 @@ export interface DocFiscal{
     numeroCaixa: number,
     itens: any,
     dataAbertura: String,
-    dataFechamento: String
+    dataFechamento: String,
+    pagamentos: any
 }
 
 export interface DocFiscalResponse{
@@ -34,12 +35,11 @@ export interface Cliente{
 }
 
 export interface DocumentoItem{
-
+    
     numItemDoc: number,
     produto: Produto,
     qtdItem: number,
     valorItem: number,
-
     porcentoIcms: number,
     valorIcms: number;
 }

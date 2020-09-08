@@ -1,9 +1,9 @@
-import { RecargaService } from './../shared/recarga.service';
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { Router } from '@angular/router';
+  import { RecargaService } from './../shared/recarga.service';
+  import { Component, OnInit, ViewChild } from '@angular/core';
+  import { Router } from '@angular/router';
 
-import { Recarga, ResponseRecargas } from '../shared/recarga.model'
-import { NgForm } from '@angular/forms';
+  import { Recarga, ResponseRecargas } from '../shared/recarga.model'
+  import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-modal-recarga',
@@ -14,28 +14,10 @@ export class ModalRecargaComponent implements OnInit {
 
   @ViewChild('formRecarga', {static: true}) formRecarga: NgForm
 
-  request : Recarga = {
-    operacao : {
-      cdOperacao : 6
-    },
-    filial : {
-      cdFilial : 1
-    },
-    recarga : {
-      idRecarga: null,
-      numeroTelefone: "",
-      valorRecarga: null,
-      operadora : {
-        idOperadora: null,
-        descricaoOperadora : '',
-      }
-    },
-    dataAbertura: "",
-    dataFechamento: "",
-    valorDocumento: null,
-    flagNota: 1,
-    numeroCaixa: 1
-  }
+  operadora: any;
+  valorRecarga: number = 0;
+  numeroTelefone: any;
+
 
   validar: any = {
     numeroTelefone : ""
@@ -56,10 +38,40 @@ export class ModalRecargaComponent implements OnInit {
   }
 
   register() : void {
+    let request : Recarga = {
+      operacao : {
+        cdOperacao : 6
+      },
+      filial : {
+        cdFilial : 1
+      },
+      recarga : {
+        idRecarga: null,
+        numeroTelefone: this.numeroTelefone,
+        valorRecarga: this.valorRecarga,
+        operadora : {
+          idOperadora: this.operadora.idOperadora,
+        }
+      },
+      dataAbertura: "",
+      dataFechamento: "",
+      valorDocumento: this.valorRecarga,
+      flagNota: 1,
+      numeroCaixa: 1,
+      pagamentos:[
+        {
+        tipoPagamento:{
+          idTipoPagamento: 4
+        },
+        vlPagamento: this.valorRecarga
+      }
+    ]
+    }
+
     if(this.formRecarga.form.valid) {
       alert("Recarga realizada com sucesso!")
-      console.log(this.request)
-      this.recargaService.postRecarga(this.request).subscribe();
+      console.log(request)
+      this.recargaService.postRecarga(request).subscribe();
       //this.router.navigate(["/"]);
     } else {
       alert("Recarga não realizada! Verifique os campos.")
@@ -68,11 +80,12 @@ export class ModalRecargaComponent implements OnInit {
 
   listarOperadoras() {
     this.recargaService.getOperadoras().subscribe(response => this.responseRecargas =response); console.log();
-
-    console.log(this.responseRecargas)
+  }
+  escolhida(){
+    console.log(this.operadora);
   }
 
-  //public validaNumero = ['(','0', /[0-9]/, /[0-9]/,')','9',/[0-9]/, /[0-9]/, /[0-9]/, /[0-9]/, '-', /[0-9]/, /[0-9]/,/[0-9]/,/[0-9]/]
-  //public numero = [/[1-9]/, /[1-9]/,'/', /[0-9]/, /[1-9]/]
+  public validaNumero = ['(','0', /[0-9]/, /[0-9]/,')','9',/[0-9]/, /[0-9]/, /[0-9]/, /[0-9]/, '-', /[0-9]/, /[0-9]/,/[0-9]/,/[0-9]/]
+  public numero = [/[1-9]/, /[1-9]/,'/', /[0-9]/, /[1-9]/]
 }
 
