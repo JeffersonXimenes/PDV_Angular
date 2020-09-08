@@ -14,4 +14,3 @@ export class Filiais {
 export interface ResponseFilial {
   filial: Filial[];
 }
-  

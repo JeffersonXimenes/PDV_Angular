@@ -238,3 +238,8 @@ input {
   text-align: left;
   font-size: 22px;
 }
+
+.arrumaData {
+  display: flex;
+  justify-content: space-around;
+}

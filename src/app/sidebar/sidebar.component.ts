@@ -19,7 +19,7 @@ export class SidebarComponent implements OnInit {
 
 
   ngOnInit(): void {
-    this.listarFilial();
+    this.listarTodas();
     //const meuDados = JSON.parse(localStorage.getItem(this.request));
     /**
      * name
@@ -28,10 +28,13 @@ export class SidebarComponent implements OnInit {
   }
 
 
-  listarFilial() {
+
+  listarTodas() {
     this.filialService.getFilial(1).subscribe(
       response => {this.request = response; console.log(this.request);
         let filial = localStorage['filial']=JSON.stringify(this.request);
+
+
       });
 
     }

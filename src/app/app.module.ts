@@ -22,7 +22,7 @@ import { ModalIdentificaClienteComponent } from './modal/modal-identifica-client
 
 import { ModalFormaPagamentoComponent } from './modal/modal-forma-pagamento/modal-forma-pagamento.component'
 import { StorageServiceModule } from 'ngx-webstorage-service';
-import { RecargaService } from './modal/modal-recarga/shared/recarga.service';
+import { NgxMaskModule } from 'ngx-mask';
 
 @NgModule({
   declarations: [
@@ -47,6 +47,7 @@ import { RecargaService } from './modal/modal-recarga/shared/recarga.service';
     TextMaskModule,
     HttpClientModule,
     StorageServiceModule ,
+    NgxMaskModule.forRoot(),
 
   ],
   providers: [

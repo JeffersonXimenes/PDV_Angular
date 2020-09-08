@@ -31,7 +31,9 @@
                         "scripts": [
                             "node_modules/bootstrap/dist/js/bootstrap.min.js",
                             "node_modules/jquery/dist/jquery.min.js",
-                            "node_modules/inputmask/dist/jquery.inputmask.js"
+                            "node_modules/inputmask/dist/jquery.inputmask.js",
+                            "src/app/header/dataHours.js",
+                            "src/app/venda/transicaoPagto.js"
                         ]
                     },
                     "configurations": {
