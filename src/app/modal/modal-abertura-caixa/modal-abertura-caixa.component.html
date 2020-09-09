@@ -1,0 +1,26 @@
+<app-card-home></app-card-home>
+<!-- Início da Modal ABERTURA -->
+<div class="modal fade" id="modalAbertura" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <label class="consertaModalTitle" style="text-align: center;">ABERTURA DE CAIXA</label>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true" routerLink="">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+                <form id="sla">
+                    <div class="form-group consertaModal">
+                        <label>CONFIRMAR A ABERTURA DO DIA {{formatUser}}</label>
+                        <!-- {{ formatUser }} -->
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer consertaModalBotton ">
+                <button type="button" class="btn btn-danger" data-dismiss="modal" id="Btncancelar" routerLink="">CANCELAR</button>
+                <button type="button" *ngIf="validadorAbertura == '0' " class="btn btn-success" data-dismiss="modal" (click)="validarAbertura()" routerLink="">CONFIRMAR</button>
+            </div>
+        </div>
+    </div>
+</div>

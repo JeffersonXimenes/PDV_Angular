@@ -1,0 +1,69 @@
+<app-card-home></app-card-home>
+<!-- Início da Modal Fechamento -->
+<div class="modal fade" id="modalFechamento" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <label class="consertaModalTitle">FECHAMENTO DE CAIXA</label>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true" routerLink="" >&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+                <form id="sla">
+                    <div class="form-group">
+                        <label class="consertaModal">CONFIRMAR O FECHAMENTO DO DIA {{formatUser}}</label>
+                        <!-- {{formatUser}} -->
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer consertaModalBotton ">
+                <button type="button" routerLink="" class="btn btn-danger" data-dismiss="modal" id="Btncancelar">CANCELAR</button>
+                <button class="btn btn-success" *ngIf="validadorFechamento == '1' " data-dismiss="modal" data-toggle="modal" href="#exibirRelatorioFechamento" (click)="exibirTotalFechamento()" >CONFIRMAR</button>
+                <!-- routerLink=".."  data-dismiss="modal" data-toggle="modal"  -->
+              </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Visulização do Fechamento -->
+<div class="modal fade" id="exibirRelatorioFechamento" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" style="overflow-y:auto;">
+  <div class="modal-dialog" role="document">
+      <div class="modal-content">
+          <div class="modal-header">
+              <button type="button" class="close" data-toggle="modal" data-dismiss="modal" routerLink=".." aria-label="fechar"><span aria-hidden="true" routerLinkActive="router-link-active" >&times;</span></button>
+          </div>
+          <div class="modal-body">
+              <div class="text-uppercase text-monospace " style="font-size: 20px;">
+                  <!-- INFORMAÇÕES LOJA -->
+                  <ul class="text-center" style="list-style: none;">
+                      <li><strong>Drogasil</strong></li>
+                      <li>Raia Drogasil S/A</li>
+                      <li mask="(00)0000-0000">Telefone: {{ filial.nrTelefone }}</li>
+                      <li mask="00.000.000.0000-00">CNPJ: {{ filial.cnpj }}</li>
+                  </ul>
+                  <!-- INFORMAÇÕES DO PRODUTO QUE FOI VENDIDO   -->
+                  <hr>
+                  <div class="modal-footer"   style="list-style: none;">
+                      <li style="text-align: left;"> </li>
+                      <li></li>
+                  </div>
+
+                  <!-- INFORMAÇÕES VALOR  -->
+                  <hr>
+                  <div class="modal-footer">
+                      <div>TOTAL DE SAÍDA (DEVOLUÇÃO)</div>
+                      <div>R$ </div>
+                  </div>
+                  <div class="modal-footer">
+                      <div class=" ">TOTAL DE ENTRADA</div>
+                      <div class=" ">{{ total | currency:'BRL' }}</div>
+                  </div>
+                  <div class="modal-footer bottonRealizadoSucesso ">
+                    <button type="button" class="btn btn-success confirmar" data-dismiss="modal" data-toggle="modal"  style="margin-left: 0px; width: 500px;" (click)="confirmFechamento()" routerLink="/">PAGÍNA INICIAL</button>
+                </div>
+              </div>
+          </div>
+      </div>
+  </div>
+</div>

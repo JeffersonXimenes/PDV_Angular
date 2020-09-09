@@ -1,0 +1,246 @@
+body {
+    background-image: url("assets/img/back.jpeg");
+    background-size: 100% 100vh;
+    background-repeat: no-repeat;
+    font-family: "Lato", sans-serif;
+    font-size: 28px;
+}
+
+#corpo {
+    margin-left: 2em;
+}
+
+
+/*  SideBar */
+
+.sidenav {
+    height: 100vh;
+    width: 40px;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: #F50823;
+    overflow-x: hidden;
+    padding-top: 100px;
+}
+
+.sidenav a {
+    padding: 6px 0px 6px 8px;
+    text-decoration: none;
+    font-size: 20px;
+    color: white;
+    display: block;
+}
+
+.sidenav a:hover {
+    color: #f1f1f1;
+}
+
+
+/* Corpo do sistema */
+
+.main {
+    /* margin-left: 100px; Same as the width of the sidenav */
+    font-size: 28px;
+    /* Increased text to enable scrolling */
+    padding: 0px 10px;
+}
+
+
+/* Menus */
+
+#menu1 {
+    margin-top: 20vh;
+}
+
+#menu2 {
+    margin-top: 5vh;
+    /* margin-left: 5vw; */
+}
+
+.menu a {
+    text-decoration: none;
+    color: white;
+}
+
+.card {
+    background-color: #F50823;
+    border-radius: 1rem;
+}
+
+.card-title {
+    font-size: 10px;
+}
+
+
+/* Tela de VendaProduto */
+
+.clientProduct {
+    height: 450px;
+    background-color: aqua;
+}
+
+#wrapper {
+    height: 80vh;
+    background-color: rgba(255, 255, 255, 0.50);
+}
+
+.list-group a {
+    font-size: 15px;
+}
+
+.items-flex {
+    display: inline-flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    /* height: 60vh; */
+    text-align: center;
+}
+
+#bodyLado .items-flex{
+  display: inline-flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  height: 320px;
+  text-align: center;
+}
+
+.valoresPagamento {
+    border-radius: 20px;
+    background-color: #F50823 !important;
+}
+
+.telaVendas {
+    margin-left: 100px;
+}
+
+
+/* Modals */
+
+.modal-content {
+    background-color: #ECDCE0;
+    border-radius: 1rem;
+}
+
+.btn-success {
+    text-decoration: none;
+    color: white !important;
+}
+
+
+/* DAQUI PRA BAIXO FOI UTILIZADO PRA ARRUMAR A MODAL <3 */
+
+.consertaModal {
+    text-align: center;
+    color: black !important;
+    font-weight: bold;
+    text-align: center;
+}
+
+.consertaModalCPF,
+.consertaModalEntradaOperador {
+    text-align: center;
+    color: black !important;
+    font-weight: bold;
+    text-align: justify;
+}
+
+.consertaModalTitle {
+    text-align: center;
+    color: #666666 !important;
+    font-weight: bold;
+    font-size: 20px;
+    display: flex;
+    justify-content: center;
+    margin-left: 130px;
+}
+
+.consertModalTitleRecarga {
+    text-align: center;
+    color: #666666 !important;
+    font-weight: bold;
+    font-size: 20px;
+    justify-content: center;
+    margin-left: 120px;
+}
+
+.form-group input {
+    text-align: right;
+    font-size: 15px;
+    height: 50px;
+}
+
+.consertaModalBotton {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-end;
+}
+
+.consertModalTitleCliente {
+    text-align: center;
+    color: #666666 !important;
+    font-weight: bold;
+    font-size: 20px;
+    justify-content: center;
+    /* margin-left: 60px; */
+}
+
+.bottonRealizadoSucesso {
+    justify-content: center;
+}
+
+.bottonRealizadoSucesso a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 450px;
+    height: 50px;
+    font-weight: bold;
+}
+
+.bottonRealizadoCupom a {
+    justify-content: center;
+    width: 450px;
+}
+
+.btn_formaPagamento a {
+    justify-content: space-around;
+    align-items: flex-end;
+}
+
+.tamanhoCard {
+    height: 210px;
+    /* width: 210px; */
+}
+
+input {
+    font-size: 12px;
+}
+
+.modal-footer {
+    display: flex;
+    justify-content: space-between;
+}
+
+.VisualDateHours {
+    font-size: 16px;
+    margin-top: -43px;
+    color: #595959;
+}
+
+#listaProdutos{
+  height: 350px;
+  overflow:auto;
+}
+
+.tamanhoText {
+  text-align: left;
+  font-size: 22px;
+}
+
+.arrumaData {
+  display: flex;
+  justify-content: space-around;
+}

@@ -1,0 +1,490 @@
+<div class="row mt-5">
+    <div class="d-flex col-sm" id="wrapper">
+        <div class="col-7 bg-light border-right mt-2 tamanhoText" id="sidebar-wrapper">
+            <div class="sidebar-heading"></div>
+            <div class="list-group list-group-flush" id="listaProdutos">
+                <table>
+                    <tr class="row" style="text-align: center;">
+                        <td class="col-1">QTD</td>
+                        <td class="col-3">Produto</td>
+                        <td class="col-3">Valor Un</td>
+                        <td class="col-3">Valor Total</td>
+                        <td class="col-1"></td>
+                    </tr>
+                    <tr class="row" *ngFor="let produtos of listaDeProdutos; let i = index;"
+                        style="font-size: 15px; text-align: center;">
+                        <td class="col-1">{{produtos.qtdProduto}} X</td>
+                        <td class="col-3">{{produtos.descricaoProduto}}</td>
+                        <td class="col-3">R$ {{produtos.valorProduto}}</td>
+                        <td class="col-3">R$ {{produtos.valorProduto * produtos.qtdProduto}}</td>
+                        <td class="col-1">
+                            <button class="btn btn-danger" style="height: 20px;" (click)="selecionarItem(i)"
+                                data-dismiss="modal" data-toggle="modal" data-target="#modalCancelarProduto">
+                                <p style="margin-top: -10px !important;">x</p>
+                            </button>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <div>
+                <div class="container items-flex">
+                    <!-- LETRAS EM CIMA DOS BOTÕES -->
+                    <form id="vendaTop">
+                        <div class="row">
+                            <div class="col">
+                                <label for="qtd-item">QTD ITEM</label>
+                                <p type="text" class="form-control valoresPagamento" id="qtd-item" style="color: white;"
+                                    readonly>{{qtdTotal}}</p>
+                            </div>
+                            <div class="col">
+                                <label for="desconto">DESCONTO</label>
+                                <input type="number" class="form-control valoresPagamento" id="desconto" readonly
+                                    value="{{desconto}}" style="color: white; text-align: center;">
+                            </div>
+                            <div class="col">
+                                <label for="total">TOTAL</label>
+                                <p type="number" class="form-control valoresPagamento" id="total" style="color: white;"
+                                    readonly> {{totalGeral | currency: 'BRL'}} </p>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- BODY DO LADO -->
+        <div class="container mt-2 ml-1" style="background-color: white; font-size: 14px;" id="bodyLado">
+            <div class="col-12 row">
+                <div class="col-6">
+                    <label for="cdProduto">CÓDIGO DO PRODUTO</label>
+                    <input type="number" [(ngModel)]="cdProduto" class="form-control" id="cdProduto" name="cdProduto">
+                </div>
+                <div class="col-6">
+                    <label>DIGITE A QUANTIDADE</label>
+                    <input type="number" [(ngModel)]="quantidade" class="form-control" ngValue="1" id="qtdProdutos"
+                        name="qtdProdutos">
+                </div>
+            </div>
+            <div style="margin-left: 15px; margin-top: 10px">
+                <button class="btn btn-success" (click)="buscarProduto()">CONFIRMAR PRODUTO</button>
+            </div>
+            <div>
+                <div class="items-flex">
+                    <div class="ml mt-5">
+
+                        <button type="button" class="btn btn-danger" data-toggle="modal"
+                            data-target="#">CANCELAR</button>
+
+                        <button type="button" class="btn btn-success" data-toggle="modal"
+                            data-target="#formasPagamento">CONFIRMAR</button>
+
+                        <input type="text" mask="000.000.000-00" class="form-control" id="codProduto" placeholder="CPF"
+                            readonly>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade" id="formasPagamento" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Forma de Pagamento</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body" style="align-items: center;">
+                <div class="dropdown">
+                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Selecione a forma de Pagamento
+                    </button>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                        <a class="dropdown-item" data-dismiss="modal" data-toggle="modal"
+                            href="#modalDinheiro">Dinheiro</a>
+                        <a class="dropdown-item" data-dismiss="modal" data-toggle="modal" href="#modalDebito">Cartão de
+                            débito</a>
+                        <a class="dropdown-item" data-dismiss="modal" data-toggle="modal" href="#modalCredito">Cartão de
+                            crédito</a>
+                        <!-- <a class="dropdown-item" href="#">Cartão de crédito</a> -->
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" routerLink="home/identificaCliente/venda"
+                    data-dismiss="modal">CANCELAR</button>
+                <!-- //<a type="button" class="btn btn-success" id='confirmaCompra' data-dismiss="modal" data-toggle="modal">CONFIRMAR</a> -->
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Dinheiro -->
+
+<div class="modal fade" id="modalDinheiro" tabindex="-1" role="dialog" aria-labelledby="modalPagamentoLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title consertModalTitileCliente " id="modalPagamentoLabel">Pagamento</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="sla">
+
+                    <div class="form-group">
+
+                        <label for="formGroupExampleInput">TOTAL</label>
+                        <input value="{{total | currency: 'BRL'}}" class="form-control" id="total" readonly>
+
+                        <div class="form-group">
+                            <label for="formGroupExampleInput">RECEBIDO</label>
+                            <input type="number" class="form-control" name="recebido" id="recebido"
+                                [(ngModel)]="recebido" (blur)="calcularTroco()">
+                        </div>
+                        <div class="form-group">
+                            <label for="formGroupExampleInput">TROCO</label>
+                            <input *ngIf="recebido >= total" type="number" class="form-control" id="troco" name="troco" cols="63"
+                                [(ngModel)]="troco" readonly>
+                            <input *ngIf="recebido < total" type="text" class="form-control" id="trocoNegat" name="trocoNegat" cols="63"
+                                [(ngModel)]="trocoNegat" readonly>
+                            <!-- <div class="alert alert-danger" role="alert" style="display: none;" id="insuficiente">
+                                Quantidade recebida insuficiente </div> -->
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer btn_formaPagamento">
+                <a class="btn btn-danger" id="btnCancelarPagamento" data-dismiss="modal" data-toggle="modal"
+                    href="#formasPagamento">CANCELAR</a>
+
+                <button *ngIf="recebido >= total" class="btn btn-success" data-dismiss="modal" data-toggle="modal"
+                    href="#modalCupom" (click)="addPagamento(4, 0)">CONFIRMAR</button>
+
+                <button *ngIf="total > recebido" class="btn btn-primary" data-dismiss="modal" data-toggle="modal"
+                    href="#formasPagamento" (click)="addPagamento(4, 1)">ADD novo pagamento</button>
+                <!-- addPagamento(tipoPagamento: number) -->
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Cupom -->
+<div class="modal fade" id="modalCupom" tabindex="-1" role="dialog" aria-labelledby="modalCupomLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title consertModalTitileCliente" id="modalCupomLabel">Pagamento</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <!-- <span aria-hidden="true">&times;</span> -->
+                </button>
+            </div>
+            <div class="modal-body" style="text-align: center;">
+                <strong>IMPRIMINDO CUPOM...</strong>
+            </div>
+
+            <div class="modal-footer bottonRealizadoSucesso ">
+                <a class="btn btn-success" data-dismiss="modal" data-toggle="modal" (click)="registrarDocFiscal()"
+                    href="#modalCupomImpresso">VENDA REALIZADA COM SUCESSO</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Cupom Impresso -->
+<div class="modal fade" id="modalCupomImpresso" tabindex="-1" role="dialog" aria-labelledby="modalCupomLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title consertModalTitileCliente" id="modalCupomImpressoLabel">Venda Realizada</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body" style="text-align: center;">
+                <strong>CUPOM IMPRESSO!</strong>
+            </div>
+
+            <div class="modal-footer bottonRealizadoCupom">
+                <a class="btn btn-primary" data-dismiss="modal" data-toggle="modal"
+                    href="#modalVisualizarNota">VISUALIZAÇÃO DA NOTA</a>
+
+                <a class="btn btn-primary" data-dismiss="modal" data-toggle="modal" href="#modalCupomEmail">ENVIAR CUPOM
+                    POR EMAIL</a>
+
+                <a class="btn btn-success" id="btnVendaRealizada" href="index.html">VENDA REALIZADA COM SUCESSO</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal cupom email -->
+<div class="modal fade" id="modalCupomEmail" tabindex="-1" role="dialog" aria-labelledby="modalCupomLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title consertModalTitileCliente" id="modalCupomEmailLabel">Pagamento</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <!-- <span aria-hidden="true">&times;</span> -->
+                    <button type="button" class="close" data-toggle="modal" data-dismiss="modal"
+                        href="#modalCupomImpresso" aria-label="fechar"><span aria-hidden="true"
+                            routerLinkActive="router-link-active">&times;</span></button>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="sla">
+                    <div class="form-group">
+                        <strong>EMAIL</strong>
+                        <input type="email" class="form-control" id="inputEmail" placeholder="CLIENTE@CLIENTE.COM">
+                    </div>
+                </form>
+            </div>
+
+            <div class="modal-footer">
+                <a class="btn btn-danger" data-dismiss="modal" data-toggle="modal"
+                    href="#modalCupomImpresso">CANCELAR</a>
+                <button class="btn btn-success" data-dismiss="modal" data-toggle="modal"
+                    routerLink="/home">CONFIRMAR</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Cupom  Enviado-->
+<div class="modal fade" id="modalCupomEnviado" tabindex="-1" role="dialog" aria-labelledby="modalCupomLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title consertModalTitileCliente" id="modalCupomEnviadoLabel">Pagamento</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body " style="text-align: center;">
+                <strong>CUPOM ENVIADO!</strong>
+            </div>
+
+            <div class="modal-footer bottonRealizadoSucesso">
+                <a class="btn btn-success" id="btnVendaRealizada" [routerLink]="['/']">VENDA REALIZADA COM SUCESSO</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Visulização da nota -->
+<div class="modal fade" id="modalVisualizarNota" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true" style="overflow-y:auto;">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-toggle="modal" data-dismiss="modal" href="#modalCupomImpresso"
+                    aria-label="fechar"><span aria-hidden="true"
+                        routerLinkActive="router-link-active">&times;</span></button>
+            </div>
+            <div class="modal-body">
+                <div class="text-uppercase text-monospace " style="font-size: 20px;">
+                    <!-- INFORMAÇÕES LOJA -->
+                    <ul class="text-center" style="list-style: none;">
+                        <li><strong>Drogasil</strong></li>
+                        <li>Raia Drogasil S/A</li>
+                        <li>Telefone: {{ filial.nrTelefone }} </li>
+                        <li>CNPJ: {{ filial.cnpj }}</li>
+                    </ul>
+                    <hr>
+                    <!-- INFORMAÇÕES DO EXTRATO N° -->
+                    <ul class="text-center" style="list-style: none;">
+                        <li><strong>Extrato N°: 000000</strong></li>
+                        <li><strong>CUPOM FISCAL ELETRONICO</strong></li>
+                    </ul>
+                    <!-- INFORMAÇÕES DO PRODUTO QUE FOI VENDIDO   -->
+                    <hr>
+                    <div class="modal-footer" *ngFor="let produto of listaDeProdutos" style="list-style: none;">
+
+                        <li style="text-align: left;">{{ produto.qtdProduto }}x {{ produto.descricaoProduto }}</li>
+                        <li>{{ produto.valorProduto | currency:'BRL' }}</li>
+
+                    </div>
+
+                    <!-- INFORMAÇÕES VALOR  -->
+                    <hr>
+                    <div class="modal-footer">
+                        <div>TOTAL BRUTO DE ITENS</div>
+                        <div>{{totalGeral | currency: 'BRL'}}</div>
+                    </div>
+                    <div class="modal-footer">
+                        <div class=" ">TOTAL DESCONTOS ITEM</div>
+                        <div class=" ">{{ desconto }}</div>
+                    </div>
+                    <div class="modal-footer">
+                        <div class=" "><strong>TOTAL</strong></div>
+                        <div class=" "><strong>{{totalGeral | currency: 'BRL'}}</strong></div>
+                    </div>
+                    <div class="modal-footer">
+                        <div class=" "><strong>VALOR RECEBIDO</strong></div>
+                        <div class=" "><strong>{{ recebido | currency: 'BRL'}}</strong></div>
+                    </div>
+                    <div class="modal-footer">
+                        <div class=" "><strong>TROCO</strong></div>
+                        <div class=" "><strong>{{ troco | currency: 'BRL'}}</strong></div>
+                    </div>
+
+                    <!-- OBSERVAÇÕES CONTRIBUINTE -->
+                    <hr>
+                    <div class="modal-footer">
+                        <div class=" ">Observações contribuinte</div>
+                        <div class=" ">Trib Aprox: R$ 0.40 Federeal e 1.15 Estadual</div>
+                    </div>
+                    <hr>
+                    <!-- FORMA PAGAMENTO  -->
+                    <div class="modal-footer">
+                        <div class=" ">Forma de Pagamento: DINHEIRO</div>
+                        <div class=" ">Valor Total {{ totalGeral | currency: 'BRL'}}</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Cartão de Debito -->
+<div class="modal fade" id="modalDebito" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Forma de Pagamento: Debito</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="sla">
+
+                    <div class="form-group">
+
+                        <label for="formGroupExampleInput">TOTAL</label>
+                        <input type="text" value="{{total | currency: 'BRL'}}" class="form-control" id="total" readonly>
+
+                        <div class="form-group">
+                            <label for="formGroupExampleInput">RECEBIDO</label>
+                            <input type="number" class="form-control" name="recebido" id="recebido"
+                                [(ngModel)]="recebido" (blur)="calcularTroco()">
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <a class="btn btn-danger" id="btnCancelarPagamento" data-dismiss="modal" data-toggle="modal"
+                    href="#formasPagamento">CANCELAR</a>
+                <button *ngIf="recebido == total" class="btn btn-success" data-dismiss="modal" data-toggle="modal"
+                    href="#modalInserirCartao" (click)="addPagamento(2, 0)">CONFIRMAR</button>
+
+                <button *ngIf="recebido < total" class="btn btn-success" data-dismiss="modal" data-toggle="modal"
+                    href="#modalInserirCartao" (click)="addPagamento(2, 1)">ADD novo pagamento</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Cartão de Crédito -->
+<div class="modal fade" id="modalCredito" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Forma de Pagamento: Crédito</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="sla">
+
+                    <div class="form-group">
+
+                        <label for="formGroupExampleInput">TOTAL</label>
+                        <input type="text" value="{{total | currency: 'BRL'}}" class="form-control" id="total" readonly>
+
+                        <div class="form-group">
+                            <label for="formGroupExampleInput">RECEBIDO</label>
+                            <input type="number" class="form-control" name="recebido" id="recebido"
+                                [(ngModel)]="recebido" (blur)="calcularTroco()">
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <a class="btn btn-danger" id="btnCancelarPagamento" data-dismiss="modal" data-toggle="modal"
+                    href="#formasPagamento">CANCELAR</a>
+                <button *ngIf="total <= recebido" class="btn btn-success" data-dismiss="modal" data-toggle="modal"
+                    href="#modalInserirCartao">CONFIRMAR</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal inserir Cartão -->
+<div class="modal fade" id="modalInserirCartao" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Forma de Pagamento</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <label for="formGroupExampleInput" style="text-align: center;">Insira o Cartão na
+                    maquininha</label>
+            </div>
+            <div class="modal-footer">
+                <a class="btn btn-danger" id="btnCancelarPagamento" (click)="cancelarPagamentoCartao()"
+                    data-dismiss="modal" data-toggle="modal" href="#formasPagamento">CANCELAR</a>
+                <button *ngIf="total > recebido " class="btn btn-success" data-dismiss="modal" data-toggle="modal"
+                    href="#formasPagamento">outra forma</button>
+                <button *ngIf=" recebido >= total" class="btn btn-success" data-dismiss="modal" data-toggle="modal"
+                    href="#modalCupom">CONFIRMAR</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Cancelamento da Venda -->
+<div class="modal fade" id="modalCancelarProduto" tabindex="-1" role="dialog"
+    aria-labelledby="modalEntradaOperadorLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title consertaModalTitle" id="modalEntradaOperadorLabel"> CANCELAR PRODUTO</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">&times;</span></button>
+            </div>
+            <div class="modal-body consertaEntradaOperador">
+                <form id="sla">
+                    <div class="form-group">
+                        <label for="formGroupExampleInput">MATRÍCULA GERENTE</label>
+                        <input type="text" [(ngModel)]="nmMatriculaGerente" name="nmMatriculaGerente"
+                            id="nmMatriculaGerente" class="form-control" placeholder="0000000" required maxlength="6">
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer consertaModalBotton">
+                <button type="button" routerLink="venda" class="btn btn-danger" data-dismiss="modal">CANCELAR</button>
+                <button type="button" class="btn btn btn-success" data-dismiss="modal" id="btnCancelarPagamento"
+                    (click)="cancelarProduto()">CONFIRMAR</button>
+            </div>
+        </div>
+    </div>
+</div>

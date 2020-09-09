@@ -1,0 +1,78 @@
+<!-- Cards de Ação Primeira Linha -->
+<div class="row menu" id="menu">
+    <!-- Card Recarga -->
+    <div class="col-sm-7 col-md-3" (click)="validarCard('recarga')">
+       <a data-toggle="modal" data-target="#modalRecarga">
+            <div class="card tamanhoCard">
+                <div class="card-body">
+                    <h5 class="card-title">RECARREGUE JÁ</h5>
+                    <p class="card-text">Recarga de Celular</p>
+                    <h5 class="card-title">MÍNIMO</h5>
+                    <h5 class="card-title">R$ 20,00</h5>
+                </div>
+            </div>
+        </a>
+   </div>
+    <!-- Card Abertura de Caixa -->
+    <div class="col-sm-7 col-md-3">
+        <a routerLink="aberturaCaixa" data-toggle="modal" data-target="#modalAbertura">
+            <div class="card">
+                <div class="card-body tamanhoCard">
+                    <h5 class="card-title">BORA TRABALHAR</h5>
+                    <p class="card-text">Abertura de Caixa</p>
+                </div>
+            </div>
+        </a>
+    </div>
+    <!-- Card Fechamento de Caixa -->
+    <div class="col-sm-7 col-md-3">
+        <a routerLink="fechamentoCaixa" data-toggle="modal" data-target="#modalFechamento">
+            <div class="card">
+                <div class="card-body tamanhoCard">
+                    <h5 class="card-title">DESCANSO</h5>
+                    <p class="card-text">Fechamento de Caixa</p>
+                </div>
+            </div>
+        </a>
+    </div>
+</div>
+
+<!-- Cards de Ação Segunda Linha-->
+<div class="row menu" id="menu_2">
+    <!-- Card Identifica Cliente  -->
+    <div class="col-sm-7 col-md-3">
+        <a (click)="validarCard('identificaCliente')" data-toggle="modal" data-target="#modalCpf">
+            <div class="card tamanhoCard ">
+                <div class="card-body ">
+                    <h5 class="card-title ">CLIENTE DROGASIL</h5>
+                    <p class="card-text ">Identifica Cliente</p>
+                    <h5 class="card-title ">DESCONTOS DE ATÉ</h5>
+                    <h5 class="card-title ">R$ 10,00</h5>
+                </div>
+            </div>
+        </a>
+    </div>
+    <!-- Card Entrada de Operador -->
+    <div class="col-sm-7 col-md-3 ">
+        <a routerLink="operador" data-toggle="modal" data-target="#entradaOperador ">
+            <div class="card tamanhoCard ">
+                <div class="card-body ">
+                   <h5 class="card-title ">É DIA DE QUEM?</h5>
+                    <p class="card-text ">Entrada de Operador</p>
+                </div>
+            </div>
+        </a>
+    </div>
+    <!-- Card Saída de Operador -->
+    <div class="col-sm-7 col-md-3 ">
+      <a data-toggle="modal" (click)="validarCard('saidaOperador')" data-target="#saidaOperador ">
+          <div class="card tamanhoCard ">
+              <div class="card-body ">
+                 <h5 class="card-title ">ISSO É UM ADEUS?</h5>
+                  <p class="card-text ">Saída de Operador</p>
+              </div>
+          </div>
+      </a>
+    </div>
+
+</div>

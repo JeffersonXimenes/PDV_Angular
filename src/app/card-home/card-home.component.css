@@ -1,0 +1,25 @@
+#menu {
+    margin-top: 20vh;
+}
+
+#menu_2 {
+    margin-top: 5vh;
+}
+
+.menu a {
+    text-decoration: none;
+    color: white;
+}
+
+.card {
+    background-color: #F50823;
+    border-radius: 1rem;
+}
+
+.card-title {
+    font-size: 10px;
+}
+
+.tamanhoCard {
+    height: 210px;
+}
