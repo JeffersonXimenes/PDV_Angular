@@ -44,7 +44,7 @@
                   </ul>
                   <!-- INFORMAÇÕES DO PRODUTO QUE FOI VENDIDO   -->
                   <hr>
-                  <div class="modal-footer"   style="list-style: none;">
+                  <div class="modal-footer" style="list-style: none;">
                       <li style="text-align: left;"> </li>
                       <li></li>
                   </div>
@@ -60,7 +60,7 @@
                       <div class=" ">{{ total | currency:'BRL' }}</div>
                   </div>
                   <div class="modal-footer bottonRealizadoSucesso ">
-                    <button type="button" class="btn btn-success confirmar" data-dismiss="modal" data-toggle="modal"  style="margin-left: 0px; width: 500px;" (click)="confirmFechamento()" routerLink="/">PAGÍNA INICIAL</button>
+                    <button type="button" class="btn btn-success confirmar" data-dismiss="modal" data-toggle="modal"  style="margin-left: 0px; width: 500px;" (click)="exibirTotal(); confirmFechamento()" routerLink="/">PAGÍNA INICIAL</button>
                 </div>
               </div>
           </div>

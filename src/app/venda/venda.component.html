@@ -71,14 +71,11 @@
                 <div class="items-flex">
                     <div class="ml mt-5">
 
-                        <button type="button" class="btn btn-danger" data-toggle="modal"
-                            data-target="#">CANCELAR</button>
+                        <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#modalCancelarVenda">CANCELAR VENDA</button>
 
-                        <button type="button" class="btn btn-success" data-toggle="modal"
-                            data-target="#formasPagamento">CONFIRMAR</button>
+                        <button type="button" class="btn btn-success" data-toggle="modal" data-target="#formasPagamento">CONFIRMAR VENDA</button>
 
-                        <input type="text" mask="000.000.000-00" class="form-control" id="codProduto" placeholder="CPF"
-                            readonly>
+                        <input type="text" [(ngModel)]="cliente.numeroCpf" mask="000.000.000-00" class="form-control" placeholder="CPF" readonly>
                     </div>
                 </div>
             </div>
@@ -86,24 +83,45 @@
     </div>
 </div>
 
+<!-- Cancelamento da Venda -->
+<div class="modal fade" id="modalCancelarVenda" tabindex="-1" role="dialog" aria-labelledby="modalEntradaOperadorLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+          <div class="modal-header">
+              <h5 class="modal-title consertaModalTitle" id="modalEntradaOperadorLabel"> CANCELAR VENDA</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close" routerLink="venda"><span aria-hidden="true">&times;</span></button>
+          </div>
+          <div class="modal-body consertaEntradaOperador">
+              <form id="sla">
+                  <div class="form-group">
+                      <label for="formGroupExampleInput">MATRÍCULA GERENTE</label>
+                      <input type="password" [(ngModel)]="nmMatriculaGerente" name="nmMatriculaGerente" id="nmMatriculaGerente" class="form-control" placeholder="0000000" required maxlength="6">
+                  </div>
+              </form>
+          </div>
+          <div class="modal-footer consertaModalBotton">
+              <button type="button" routerLink="venda" class="btn btn-danger" data-dismiss="modal" id="btnCancelarPagamento">CANCELAR</button>
+              <button type="button" class="btn btn btn-success" (click)="cancelarVenda()" data-dismiss="modal" id="btnCancelarPagamento">CONFIRMAR</button>
+          </div>
+      </div>
+  </div>
+</div>
 
+<!-- Formas de Pagamento -->
 <div class="modal fade" id="formasPagamento" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
     aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLongTitle">Forma de Pagamento</h5>
+                <h5 class="modal-title consertaModalTitle" id="exampleModalLongTitle" style="margin-left: 115px">FORMA DE PAGAMENTO</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body" style="align-items: center;">
-                <div class="dropdown">
-                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton"
-                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Selecione a forma de Pagamento
-                    </button>
-                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                <div class="dropdown" >
+                    <button style="width: 465px" class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">SELECIONE A FORMA DE PAGAMENTO</button>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" >
                         <a class="dropdown-item" data-dismiss="modal" data-toggle="modal"
                             href="#modalDinheiro">Dinheiro</a>
                         <a class="dropdown-item" data-dismiss="modal" data-toggle="modal" href="#modalDebito">Cartão de
@@ -130,30 +148,24 @@
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title consertModalTitileCliente " id="modalPagamentoLabel">Pagamento</h5>
+                <h5 class="modal-title consertaModalTitle" id="modalPagamentoLabel" style="margin-left: 175px">PAGAMENTO</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
                 <form id="sla">
-
                     <div class="form-group">
-
                         <label for="formGroupExampleInput">TOTAL</label>
                         <input value="{{total | currency: 'BRL'}}" class="form-control" id="total" readonly>
-
                         <div class="form-group">
                             <label for="formGroupExampleInput">RECEBIDO</label>
-                            <input type="number" class="form-control" name="recebido" id="recebido"
-                                [(ngModel)]="recebido" (blur)="calcularTroco()">
+                            <input type="number" class="form-control" name="recebido" id="recebido" [(ngModel)]="recebido" (blur)="calcularTroco()">
                         </div>
                         <div class="form-group">
                             <label for="formGroupExampleInput">TROCO</label>
-                            <input type="number" class="form-control" id="troco" name="troco" cols="63"
-                                [(ngModel)]="troco" readonly>
-                            <div class="alert alert-danger" role="alert" style="display: none;" id="insuficiente">
-                                Quantidade recebida insuficiente </div>
+                            <input type="number" class="form-control" id="troco" name="troco" cols="63" [(ngModel)]="troco" readonly>
+                            <div class="alert alert-danger" role="alert" style="display: none;" id="insuficiente">QUANTIDADE RECEBIDA INSUFICIENTE</div>
                         </div>
                     </div>
                 </form>
@@ -179,18 +191,16 @@
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title consertModalTitileCliente" id="modalCupomLabel">Pagamento</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <!-- <span aria-hidden="true">&times;</span> -->
-                </button>
+                <h5 class="modal-title consertaModalTitle" id="modalCupomLabel" style="margin-left: 65px">VENDA REALIZADA COM SUCESSO</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body" style="text-align: center;">
                 <strong>IMPRIMINDO CUPOM...</strong>
             </div>
 
             <div class="modal-footer bottonRealizadoSucesso ">
-                <a class="btn btn-success" data-dismiss="modal" data-toggle="modal" (click)="registrarDocFiscal()"
-                    href="#modalCupomImpresso">VENDA REALIZADA COM SUCESSO</a>
+                <a class="btn btn-success" data-dismiss="modal" data-toggle="modal" href="#modalCupomImpresso">VENDA REALIZADA COM SUCESSO</a>
+                    <!-- (click)="registrarDocFiscal()" MUDEI PARA A DO EMAIL  -->
             </div>
         </div>
     </div>
@@ -202,7 +212,7 @@
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title consertModalTitileCliente" id="modalCupomImpressoLabel">Venda Realizada</h5>
+                <h5 class="modal-title consertaModalTitle" id="modalCupomImpressoLabel">VENDA REALIZADA</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -212,13 +222,11 @@
             </div>
 
             <div class="modal-footer bottonRealizadoCupom">
-                <a class="btn btn-primary" data-dismiss="modal" data-toggle="modal"
-                    href="#modalVisualizarNota">VISUALIZAÇÃO DA NOTA</a>
+                <a class="btn btn-primary" data-dismiss="modal" data-toggle="modal" href="#modalVisualizarNota">VISUALIZAÇÃO DA NOTA</a>
 
-                <a class="btn btn-primary" data-dismiss="modal" data-toggle="modal" href="#modalCupomEmail">ENVIAR CUPOM
-                    POR EMAIL</a>
+                <a class="btn btn-primary" data-dismiss="modal" data-toggle="modal" href="#modalCupomEmail">ENVIAR CUPOM POR EMAIL</a>
 
-                <a class="btn btn-success" id="btnVendaRealizada" href="index.html">VENDA REALIZADA COM SUCESSO</a>
+                <a class="btn btn-success" id="btnVendaRealizada" (click)="registrarDocFiscal()" href="index.html">VENDA REALIZADA COM SUCESSO</a>
             </div>
         </div>
     </div>
@@ -230,50 +238,46 @@
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title consertModalTitileCliente" id="modalCupomEmailLabel">Pagamento</h5>
+                <h5 class="modal-title consertaModalTitle" id="modalCupomEmailLabel" style="margin-right: 0px" >EMAIL DO CLIENTE</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <!-- <span aria-hidden="true">&times;</span> -->
-                    <button type="button" class="close" data-toggle="modal" data-dismiss="modal"
-                        href="#modalCupomImpresso" aria-label="fechar"><span aria-hidden="true"
-                            routerLinkActive="router-link-active">&times;</span></button>
+                    <button type="button" class="close" data-toggle="modal" data-dismiss="modal" href="#modalCupomImpresso" aria-label="fechar"><span aria-hidden="true" routerLinkActive="router-link-active">&times;</span></button>
                 </button>
             </div>
             <div class="modal-body">
                 <form id="sla">
                     <div class="form-group">
                         <strong>EMAIL</strong>
-                        <input type="email" class="form-control" id="inputEmail" placeholder="CLIENTE@CLIENTE.COM">
+                        <input type="email" [(ngModel)]="emailCliente" name="emailCliente" id="emailCliente" class="form-control" placeholder="CLIENTE@CLIENTE.COM">
                     </div>
                 </form>
             </div>
 
             <div class="modal-footer">
-                <a class="btn btn-danger" data-dismiss="modal" data-toggle="modal"
-                    href="#modalCupomImpresso">CANCELAR</a>
-                <button class="btn btn-success" data-dismiss="modal" data-toggle="modal"
-                    routerLink="/home">CONFIRMAR</button>
+                <a class="btn btn-danger" data-dismiss="modal" data-toggle="modal" href="#modalCupomImpresso">CANCELAR</a>
+                <button class="btn btn-success" data-dismiss="modal" data-toggle="modal" (click)="registrarDocFiscal()" href="#modalEmailEnviado">CONFIRMAR</button>
             </div>
         </div>
     </div>
 </div>
 
 <!-- Modal Cupom  Enviado-->
-<div class="modal fade" id="modalCupomEnviado" tabindex="-1" role="dialog" aria-labelledby="modalCupomLabel"
+<div class="modal fade" id="modalEmailEnviado" tabindex="-1" role="dialog" aria-labelledby="modalCupomLabel"
     aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title consertModalTitileCliente" id="modalCupomEnviadoLabel">Pagamento</h5>
+                <h5 class="modal-title consertaModalTitle" id="modalCupomEnviadoLabel"></h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <div class="modal-body " style="text-align: center;">
+            <div class="modal-body" style="text-align: center;">
                 <strong>CUPOM ENVIADO!</strong>
             </div>
 
             <div class="modal-footer bottonRealizadoSucesso">
-                <a class="btn btn-success" id="btnVendaRealizada" [routerLink]="['/']">VENDA REALIZADA COM SUCESSO</a>
+                <button class="btn btn-success" id="btnVendaRealizada" style="margin-left: 0px; width: 500px;" data-dismiss="modal" data-toggle="modal" routerLink="/" >VENDA REALIZADA COM SUCESSO</button>
             </div>
         </div>
     </div>
@@ -285,9 +289,7 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <button type="button" class="close" data-toggle="modal" data-dismiss="modal" href="#modalCupomImpresso"
-                    aria-label="fechar"><span aria-hidden="true"
-                        routerLinkActive="router-link-active">&times;</span></button>
+                <button type="button" class="close" data-toggle="modal" data-dismiss="modal" href="#modalCupomImpresso" aria-label="fechar"><span aria-hidden="true" routerLinkActive="router-link-active">&times;</span></button>
             </div>
             <div class="modal-body">
                 <div class="text-uppercase text-monospace " style="font-size: 20px;">
@@ -317,7 +319,7 @@
                     <hr>
                     <div class="modal-footer">
                         <div>TOTAL BRUTO DE ITENS</div>
-                        <div>{{total | currency: 'BRL'}}</div>
+                        <div>{{totalGeral | currency: 'BRL'}}</div>
                     </div>
                     <div class="modal-footer">
                         <div class=" ">TOTAL DESCONTOS ITEM</div>
@@ -325,7 +327,7 @@
                     </div>
                     <div class="modal-footer">
                         <div class=" "><strong>TOTAL</strong></div>
-                        <div class=" "><strong>{{total | currency: 'BRL'}}</strong></div>
+                        <div class=" "><strong>{{totalGeral | currency: 'BRL'}}</strong></div>
                     </div>
                     <div class="modal-footer">
                         <div class=" "><strong>VALOR RECEBIDO</strong></div>

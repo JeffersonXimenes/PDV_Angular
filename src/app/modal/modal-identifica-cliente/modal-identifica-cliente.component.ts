@@ -9,7 +9,7 @@ import { Cliente } from './shared/cliente.model';
 })
 export class ModalIdentificaClienteComponent implements OnInit {
 
-  request : Cliente = {
+  request : any = {
     idCliente : 0,
     numeroCpf : '',
     email: '',
@@ -29,8 +29,8 @@ export class ModalIdentificaClienteComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  registrarCliente() : void {
-    this.clienteService.postCliente(this.request).subscribe();
+  registrarCliente() {
+    this.clienteService.postCliente(this.request).subscribe(); console.log(this.request)
     alert("Cliente registrado com sucesso!")
   }
 
@@ -40,13 +40,15 @@ export class ModalIdentificaClienteComponent implements OnInit {
         if(this.respostaCliente.idCliente == null) {
           alert("Cliente não cadastrado!")
           this.registrarCliente();
-          let clienteNaoCadastrado = localStorage['clienteNAOCadastrado'] = JSON.stringify(this.respostaCliente)
+
         } else {
           alert("Cliente encontrado!")
           //response => {this.respostaCliente = response; console.log(this.request);console.log(this.respostaCliente)}
           let cliente = localStorage['clienteCadastrado'] = JSON.stringify(this.respostaCliente)
+          location.reload()
         }
       })
+
     //setTimeout( () => {alert("NÃO TANKEI")}, 3000 )
     }
   }

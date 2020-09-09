@@ -32,10 +32,11 @@ export interface Filial{
 
 export interface Cliente{
     idCliente: number;
+    email: String;
 }
 
 export interface DocumentoItem{
-    
+
     numItemDoc: number,
     produto: Produto,
     qtdItem: number,
