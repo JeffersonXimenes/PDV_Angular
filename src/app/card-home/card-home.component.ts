@@ -26,13 +26,9 @@ export class CardHomeComponent implements OnInit {
 
   public totalValores : Array <number> = [];
 
-
-
-  //guardarAqui : Array <any> = []
   ngOnInit(): void {
     this.guardarValores()
-    //console.log(this.totalValores)
-    //console.log(Global.totalFechamentoCaixa.push())
+
     console.log(FechamentoCaixa.totalFechamento)
     console.log(localStorage.getItem('totalValores').length)
     console.log(FechamentoCaixa.soma.length)

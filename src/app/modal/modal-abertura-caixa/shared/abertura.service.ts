@@ -10,9 +10,15 @@ import { Injectable } from "@angular/core";
 export class AberturaService {
   constructor(private http: HttpClient) {}
 
-  private readonly API = 'http://localhost:8080/pdv/DataAbertura';
+  private readonly APIAbertura = 'http://localhost:8080/pdv/DataAbertura';
+  private readonly APIFechamento = 'http://localhost:8080/pdv/DataFechamento'
 
   postDataAbertura(request: Abertura) : Observable<Abertura> {
-    return this.http.post<Abertura>(this.API, request)
+    return this.http.post<Abertura>(this.APIAbertura, request)
   }
+
+  postDataFechamento(request: Abertura) : Observable<Abertura> {
+    return this.http.post<Abertura>(this.APIFechamento, request)
+  }
+
 }

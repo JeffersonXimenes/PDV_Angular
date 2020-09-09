@@ -42,8 +42,8 @@ export class ModalFechamentoCaixaComponent implements OnInit {
       localStorage.setItem('status', '0')
     }
     let requestFechamento : any = {
-      dataAbertura : '',
-      dataFechamento : this.formatUser,
+      dataAbertura : null,
+      dataFechamento : this.formatoBd,
       filial : {
         cdFilial : 1
       },
@@ -52,8 +52,9 @@ export class ModalFechamentoCaixaComponent implements OnInit {
         cdOperacao : 7,
       }
     }
+    alert("Caixa fechado com sucesso!")
+    this.aberturaService.postDataFechamento(requestFechamento).subscribe; console.log(requestFechamento)
 
-    this.aberturaService.postDataAbertura(requestFechamento).subscribe; console.log(requestFechamento)
   }
 
   exibirTotal()  {
