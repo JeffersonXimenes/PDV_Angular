@@ -32,6 +32,7 @@ export interface Filial{
 
 export interface Cliente{
     idCliente: number;
+    email : string;
 }
 
 export interface DocumentoItem{

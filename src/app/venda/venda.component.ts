@@ -5,6 +5,7 @@ import { ResponseProduto, Produto } from './shared/produto.model';
 import { DocFiscal, DocumentoItem, NrNotaFiscal } from './shared/doc-fiscal.model';
 import { NgForm } from '@angular/forms';
 import { OperadorService } from '../modal/modal-matricula-operador/shared/operador.service';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -16,7 +17,11 @@ export class VendaComponent implements OnInit {
 
   @ViewChild('formProdutos', { static: true }) formProdutos: NgForm;
 
-  constructor(private produtoService: ProdutoService, private docFiscaService: DocFiscalService, private operadorService: OperadorService) { }
+  constructor(
+    private produtoService: ProdutoService, 
+    private docFiscaService: DocFiscalService, 
+    private operadorService: OperadorService,
+    private router : Router) { }
 
   cliente: any
   responseProduto: ResponseProduto[];
@@ -42,10 +47,29 @@ export class VendaComponent implements OnInit {
   trocoNegat: any = 0.0;
   nxtNumber: NrNotaFiscal;
 
+ 
+  emailCliente : string;
+  aberturaFechamento : any;
+
   ngOnInit(): void {
     this.cliente = JSON.parse(localStorage['clienteCadastrado']);
-    console.log(this.cliente);
+    this.aberturaFechamento = JSON.parse(localStorage['aberturaCaixa'])
   }
+
+  // Cancelar Venda 
+  cancelarVenda () {
+    this.operadorService.getOperador(this.nmMatriculaGerente).subscribe(
+      response => {this.requestGerente = response; console.log(this.requestGerente)
+        if (this.requestGerente.descricaoCargo == 'GERENTE' ) {
+          alert("Venda cancelada com sucesso!")
+          this.router.navigate(['home']);
+        } else {
+          alert("Você não é gerente")
+        }
+      }
+    )
+  }
+
 
   //Função para buscar o produto pelo código no banco de dados
   buscarProduto() {
@@ -138,10 +162,11 @@ export class VendaComponent implements OnInit {
         cdFilial: this.filial.cdFilial
       },
       cliente: {
-        idCliente: this.cliente.idCliente
+        idCliente: this.cliente.idCliente,
+        email : this.emailCliente
       },
 
-      dataAbertura: "",
+      dataAbertura: this.aberturaFechamento.dataAbertura,
       dataFechamento: "",
       flagNota: 1,
       valorDocumento: this.totalGeral,
@@ -151,7 +176,8 @@ export class VendaComponent implements OnInit {
     }
 
     localStorage.vendas = JSON.stringify(retorno.valorDocumento)
-
+    localStorage.setItem('clienteCadastrado', '');
+    
     this.docFiscaService.createDocFiscal(retorno).subscribe()
     console.log(retorno);
 
