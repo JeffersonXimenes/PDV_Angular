@@ -34,6 +34,10 @@ export class ModalAberturaCaixaComponent implements OnInit {
     this.validadorAbertura = localStorage.getItem('status')
   }
 
+  relodar() {
+    location.reload();
+  }
+
  
 
   dataAbertura() {

@@ -24,6 +24,7 @@ export class SidebarComponent implements OnInit {
     /**
      * name
      */
+    localStorage.setItem('clienteCadastrado', '');
 
   }
 

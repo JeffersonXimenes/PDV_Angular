@@ -2,8 +2,11 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { ProdutoService } from './shared/produto.service';
 import { DocFiscalService } from './shared/doc-fiscal.service'
 import { ResponseProduto, Produto } from './shared/produto.model';
-import { DocFiscal, DocumentoItem } from './shared/doc-fiscal.model';
+import { DocFiscal, DocumentoItem, NrNotaFiscal } from './shared/doc-fiscal.model';
 import { NgForm } from '@angular/forms';
+import { OperadorService } from '../modal/modal-matricula-operador/shared/operador.service';
+import { Router } from '@angular/router';
+
 
 @Component({
   selector: 'app-venda',
@@ -14,8 +17,13 @@ export class VendaComponent implements OnInit {
 
   @ViewChild('formProdutos', { static: true }) formProdutos: NgForm;
 
-  constructor(private produtoService: ProdutoService, private docFiscaService: DocFiscalService) { }
-  cliente : any
+  constructor(
+    private produtoService: ProdutoService, 
+    private docFiscaService: DocFiscalService, 
+    private operadorService: OperadorService,
+    private router : Router) { }
+
+  cliente: any
   responseProduto: ResponseProduto[];
   docFiscal: DocFiscal;
   request: any;
@@ -23,40 +31,65 @@ export class VendaComponent implements OnInit {
   listaItensNota: Array<any> = [];
   cdProduto: number;
   quantidade: number = 1;
-  total: number = 0;
-  totalGeral: number;
-  qtdTotal: number = 0;
-  desconto: number = 0;
-  dinheiro: number = 0;
+  total: any = 0.0;
+  totalGeral: any = 0.0;
+  qtdTotal: any = 0.0;
+  desconto: number = 0.0;
+  dinheiro: number = 0.0;
   filial = JSON.parse(localStorage['filial']);
-  troco: number = 0;
-  recebido: number = 0;
-  numItem: number = 0;
+  troco: any = 0.0;
+  recebido: any = 0.0;
+  numItem: number = 0.0;
   pagamentos: Array<Pagamento> = [];
+  requestGerente: any;
+  nmMatriculaGerente: string;
+  itemSelec: any;
+  trocoNegat: any = 0.0;
+  nxtNumber: NrNotaFiscal;
+
+ 
+  emailCliente : string ;
+  aberturaFechamento : any;
 
   ngOnInit(): void {
     this.cliente = JSON.parse(localStorage['clienteCadastrado']);
-    console.log(this.cliente);
+    this.aberturaFechamento = JSON.parse(localStorage['aberturaCaixa'])
   }
 
-  //Função para buscar o produto leo código no banco de dados
+  // Cancelar Venda 
+  cancelarVenda () {
+    this.operadorService.getOperador(this.nmMatriculaGerente).subscribe(
+      response => {this.requestGerente = response; console.log(this.requestGerente)
+        if (this.requestGerente.descricaoCargo == 'GERENTE' ) {
+          alert("Venda cancelada com sucesso!")
+          this.router.navigate(['home']);
+          localStorage.setItem('clienteCadastrado', '');
+        } else {
+          alert("Você não é gerente")
+        }
+      }
+    )
+  }
+
+
+  //Função para buscar o produto pelo código no banco de dados
   buscarProduto() {
 
-    if(this.cdProduto == null || this.cdProduto <= 0){
+    if (this.cdProduto == null || this.cdProduto <= 0) {
       alert("DIgite um código de produto válido");
     }
-    else if(this.quantidade == null || this.quantidade < 1){
+    else if (this.quantidade == null || this.quantidade < 1) {
       alert("Quantidade Inválida, insira um número maior que 0")
     }
-    else{
-    this.produtoService.getProduto(this.cdProduto).subscribe(response => {
-      this.request = response; this.addProdutoLista();
-      if (this.request == null) {
-        alert("Produto não existe!")
-      }
-      let produto = localStorage['produto'] = JSON.stringify(this.listaDeProdutos);
-    });
-  }
+    else {
+      this.produtoService.getProduto(this.cdProduto).subscribe(response => {
+        this.request = response; this.addProdutoLista();
+        if (this.request == null) {
+          alert("Produto não existe!")
+        }
+        let produto = localStorage['produto'] = JSON.stringify(this.listaDeProdutos);
+      });
+    }
   }
 
   //Função para adicionar um item a lista de produtos
@@ -64,8 +97,8 @@ export class VendaComponent implements OnInit {
     let item = new VendaItem(this.request.cdProduto, this.request.valorProduto,
       this.request.descricaoProduto, this.quantidade);
     this.listaDeProdutos.push(item);
-    this.total += (this.request.valorProduto * this.quantidade);
-    this.totalGeral = this.total;
+    this.total = Math.round((this.total + (this.request.valorProduto * this.quantidade)) * 100) / 100;
+    this.totalGeral = Math.round(this.total * 100) / 100;
     this.qtdTotal += (this.quantidade);
     this.addItensNota();
 
@@ -73,6 +106,7 @@ export class VendaComponent implements OnInit {
 
   }
 
+  //Função para adicionar o produto na lista de itens da nota
   addItensNota() {
     let docItem = new DocItem();
     let docItemProd = new DocItemProd(this.request.cdProduto);
@@ -87,45 +121,53 @@ export class VendaComponent implements OnInit {
 
   }
 
-  addPagamento(formaPagamento: number, partePaga: number){
+  //Função para um pagamento no array de pagamentos
+  addPagamento(formaPagamento: number, partePaga: number) {
     let pagto = new Pagamento();
     let pagtoTipo = new TipoPagamento(formaPagamento);
     pagto.tipoPagamento = pagtoTipo;
 
-    if (partePaga == 0){
+    if (partePaga == 0) {
       pagto.vlPagamento = this.total;
-    }else if(partePaga == 1){
+    } else if (partePaga == 1) {
       pagto.vlPagamento = this.recebido;
     }
     this.pagamentos.push(pagto);
-    this.total -= this.recebido;
+    this.total = Math.round((this.total - this.recebido) * 100) / 100;
+    this.recebido = 0;
     console.log(this.pagamentos);
   }
 
-  cancelarPagamentoCartao(){
+  //Retirar o pagamento do cartão da lista caso não prossiga com o pagamento
+  cancelarPagamentoCartao() {
     this.pagamentos.pop();
   }
 
   //Função para calculo de troco
   calcularTroco() {
-    this.troco = this.recebido - this.total;
+    if (this.recebido < this.total) {
+      this.trocoNegat = ("Faltam: R$ " + Math.round((this.total - this.recebido) * 100) / 100);
+    }
+    this.troco = Math.round((this.recebido - this.total) * 100) / 100;
+
   }
 
-  //Função para adicionar as informações do documento fiscal
+  // Função para adicionar as informações do documento fiscal
   registrarDocFiscal() {
-    //Formato do json a ser mandado para API
+    // Formato do json a ser mandado para API
     let retorno: DocFiscal = {
       operacao: {
-        cdOperacao: 4
+        cdOperacao: 1
       },
       filial: {
         cdFilial: this.filial.cdFilial
       },
       cliente: {
-        idCliente: this.cliente.idCliente
+        idCliente: this.cliente.idCliente,
+        email : this.cliente.email
       },
 
-      dataAbertura: "",
+      dataAbertura: this.aberturaFechamento.dataAbertura,
       dataFechamento: "",
       flagNota: 1,
       valorDocumento: this.totalGeral,
@@ -134,33 +176,51 @@ export class VendaComponent implements OnInit {
       pagamentos: this.pagamentos
     }
 
-    localStorage.vendas = JSON.stringify(retorno.valorDocumento)
+    localStorage['vendas'] = JSON.stringify(retorno.valorDocumento)
     
+
+    localStorage.setItem('clienteCadastrado', '');
+
     this.docFiscaService.createDocFiscal(retorno).subscribe()
     console.log(retorno);
 
   }
 
-  cancelarProduto(teste: any){
-    console.log(teste)
-
-    this.total = (this.total - this.listaDeProdutos[teste].valorProduto);
-    this.listaDeProdutos.splice(teste,1);
-    this.listaItensNota.splice(teste,1);
-    for(let i = 0; i < this.listaItensNota.length; i++){
-      this.listaItensNota[i].numItemDoc = i+1;
-      console.log(this.listaItensNota[i]);
-      this.numItem = i+1
-    }
-    console.log(this.listaItensNota);
-    console.log(this.listaDeProdutos);
-    // for(let i = 0; i <= this.listaDeProdutos.length; i++){
-    //   if(this.listaDeProdutos[i] == numeroItem){
-    //     this.listaDeProdutos.splice(i,1);
-    //   }
-    // }
+  //Função pra retornar o numero do item na lista que será cancelado
+  selecionarItem(itemSelecionado: any) {
+    this.itemSelec = itemSelecionado
   }
 
+  //Função de cancelamento de produtos
+  cancelarProduto() {
+
+    this.operadorService.getOperador(this.nmMatriculaGerente).subscribe(
+      response => {
+        this.requestGerente = response; console.log(this.requestGerente)
+        if (this.requestGerente.descricaoCargo == 'GERENTE') {
+          alert("Produto Cancelado");
+          this.total = (this.total - (this.listaDeProdutos[this.itemSelec].valorProduto * this.listaItensNota[this.itemSelec].qtdItem));
+          this.qtdTotal = (1 * (this.qtdTotal - this.listaItensNota[this.itemSelec].qtdItem));
+
+          this.listaDeProdutos.splice(this.itemSelec, 1);
+          this.listaItensNota.splice(this.itemSelec, 1);
+          for (let i = 0; i < this.listaItensNota.length; i++) {
+            this.listaItensNota[i].numItemDoc = i + 1;
+            this.numItem = i + 1
+          }
+          this.nmMatriculaGerente = null;
+        } else {
+          alert("Você não é gerente")
+        }
+      }
+    )
+
+  }
+
+  //Função para gerar numero da nota fiscal
+  gerarNrNf() {
+    this.docFiscaService.getNrNotaFiscal(this.filial.cdFilial).subscribe(response => this.nxtNumber = response)
+  }
 }
 //Final do component
 
@@ -175,7 +235,7 @@ class DocumentoFiscal {
   public numeroCaixa: number;
   public itens: Array<DocItem> = [];
 
-  constructor() {};
+  constructor() { };
 
 }
 
@@ -200,13 +260,13 @@ class DocItemProd {
   constructor(public cdProduto: number) { }
 }
 
-class Pagamento{
+class Pagamento {
   tipoPagamento: TipoPagamento;
-  vlPagamento: number ;
-  constructor(){}
+  vlPagamento: number;
+  constructor() { }
 }
 
-class TipoPagamento{
+class TipoPagamento {
 
-  constructor(public idTipoPagamento: number){}
+  constructor(public idTipoPagamento: number) { }
 }

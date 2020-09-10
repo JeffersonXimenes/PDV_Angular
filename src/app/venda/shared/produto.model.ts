@@ -4,8 +4,6 @@ export interface Produto {
     descricaoProduto: String
 }
 
-
-
 export interface ResponseProduto {
     produto: Produto[]
 }

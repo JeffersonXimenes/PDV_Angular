@@ -4,6 +4,7 @@ import { formatDate } from '@angular/common';
 import { format } from 'path';
 import { Component, OnInit } from '@angular/core';
 import { Global } from 'src/app/global';
+import { AberturaService } from '../modal-abertura-caixa/shared/abertura.service';
 
 @Component({
   selector: 'app-modal-fechamento-caixa',
@@ -14,20 +15,25 @@ export class ModalFechamentoCaixaComponent implements OnInit {
 
   formatUsuario = new Date()
   formatUser : string;
+  now = new Date()
+  formatoBd: string;
+
+
   validadorFechamento = localStorage.getItem('status')
-  filial : any
-  total : number = 0
+  filial: any;
+  total: number = 0;
 
 
-  constructor() {}
+  constructor(
+    private aberturaService : AberturaService
+  ) {}
 
   ngOnInit(): void {
-    this.formatUser = formatDate(this.formatUsuario, 'dd/MM/yyyy', 'en-US')
-    this.validadorFechamento
+    this.formatUser = formatDate(this.formatUsuario, 'dd/MM/yyyy', 'en-US');
+    this.formatoBd = formatDate(this.now, 'yyyy-MM-dd', 'en-US');
+    
+    this.validadorFechamento;
     this.filial = JSON.parse(localStorage['filial'])
-    //this.somaFechamento = JSON.parse(localStorage['totalValores'])
-    //console.log(this.somaFechamento.length)
-    //this.exibirTotalFechamento()
     this.exibirTotal()
   }
 
@@ -35,6 +41,20 @@ export class ModalFechamentoCaixaComponent implements OnInit {
     if(localStorage.getItem('status') == '1') {
       localStorage.setItem('status', '0')
     }
+    let requestFechamento : any = {
+      dataAbertura : null,
+      dataFechamento : this.formatoBd,
+      filial : {
+        cdFilial : 1
+      },
+      numeroCaixa : 1,
+      operacao : {
+        cdOperacao : 7,
+      }
+    }
+    alert("Caixa fechado com sucesso!")
+    this.aberturaService.postDataFechamento(requestFechamento).subscribe; console.log(requestFechamento)
+
   }
 
   exibirTotal()  {
@@ -51,6 +71,7 @@ export class ModalFechamentoCaixaComponent implements OnInit {
   confirmFechamento() {
     this.validarFechamento()
     localStorage.setItem('totalValores' , '[]')
+    localStorage.setItem('aberturaCaixa' , '')
   }
 
 

@@ -32,10 +32,10 @@ export interface Filial{
 
 export interface Cliente{
     idCliente: number;
+    email : string;
 }
 
 export interface DocumentoItem{
-    
     numItemDoc: number,
     produto: Produto,
     qtdItem: number,
@@ -48,4 +48,8 @@ export interface Produto {
     cdProduto: number,
     valorProduto: number,
     descricaoProduto: String
+}
+
+export interface NrNotaFiscal{
+    proxNumFiscal: number;
 }
