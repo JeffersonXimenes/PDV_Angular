@@ -18,7 +18,7 @@ export class ModalAberturaCaixaComponent implements OnInit {
   formatUser : string;
 
   statusCaixa : number; // 1 ABERTO
-                        // 0 DESATIVADO
+                                   // 0 DESATIVADO
 
   validadorAbertura : any
 
@@ -34,7 +34,7 @@ export class ModalAberturaCaixaComponent implements OnInit {
     this.validadorAbertura = localStorage.getItem('status')
   }
 
-
+ 
 
   dataAbertura() {
     let request : any = {

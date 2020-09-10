@@ -1,7 +1,7 @@
 <!-- Cards de Ação Primeira Linha -->
 <div class="row menu" id="menu">
     <!-- Card Recarga -->
-    <div class="col-sm-7 col-md-3" (click)="validarCard('recarga')">
+    <div class="col-sm-7 col-md-3" (click)="validarCard('recarga'); validarAbertura('recarga') ">
        <a data-toggle="modal" data-target="#modalRecarga">
             <div class="card tamanhoCard">
                 <div class="card-body">
@@ -15,7 +15,7 @@
    </div>
     <!-- Card Abertura de Caixa -->
     <div class="col-sm-7 col-md-3">
-        <a routerLink="aberturaCaixa" data-toggle="modal" data-target="#modalAbertura">
+        <a routerLink="aberturaCaixa" (click)="validarCard('aberturaCaixa')" data-toggle="modal" data-target="#modalAbertura">
             <div class="card">
                 <div class="card-body tamanhoCard">
                     <h5 class="card-title">BORA TRABALHAR</h5>
@@ -26,7 +26,7 @@
     </div>
     <!-- Card Fechamento de Caixa -->
     <div class="col-sm-7 col-md-3">
-        <a routerLink="fechamentoCaixa" data-toggle="modal" data-target="#modalFechamento">
+        <a (click)="validarCard('fechamentoCaixa'); validarAbertura('fechamentoCaixa')"data-toggle="modal" data-target="#modalFechamento">
             <div class="card">
                 <div class="card-body tamanhoCard">
                     <h5 class="card-title">DESCANSO</h5>
@@ -41,7 +41,7 @@
 <div class="row menu" id="menu_2">
     <!-- Card Identifica Cliente  -->
     <div class="col-sm-7 col-md-3">
-        <a (click)="validarCard('identificaCliente')" data-toggle="modal" data-target="#modalCpf">
+        <a (click)="validarCard('identificaCliente'); validarAbertura('identificaCliente')" data-toggle="modal" data-target="#modalCpf">
             <div class="card tamanhoCard ">
                 <div class="card-body ">
                     <h5 class="card-title ">CLIENTE DROGASIL</h5>
@@ -54,7 +54,7 @@
     </div>
     <!-- Card Entrada de Operador -->
     <div class="col-sm-7 col-md-3 ">
-        <a routerLink="operador" data-toggle="modal" data-target="#entradaOperador ">
+        <a routerLink="operador" data-toggle="modal" data-target="#entradaOperador">
             <div class="card tamanhoCard ">
                 <div class="card-body ">
                    <h5 class="card-title ">É DIA DE QUEM?</h5>
@@ -65,7 +65,7 @@
     </div>
     <!-- Card Saída de Operador -->
     <div class="col-sm-7 col-md-3 ">
-      <a data-toggle="modal" (click)="validarCard('saidaOperador')" data-target="#saidaOperador ">
+      <a data-toggle="modal" routerLink="saidaOperador" data-target="#saidaOperador">
           <div class="card tamanhoCard ">
               <div class="card-body ">
                  <h5 class="card-title ">ISSO É UM ADEUS?</h5>

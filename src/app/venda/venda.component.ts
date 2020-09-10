@@ -1,11 +1,9 @@
-import { OperadorService } from './../modal/modal-matricula-operador/shared/operador.service';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ProdutoService } from './shared/produto.service';
 import { DocFiscalService } from './shared/doc-fiscal.service'
 import { ResponseProduto, Produto } from './shared/produto.model';
 import { DocFiscal, DocumentoItem } from './shared/doc-fiscal.model';
 import { NgForm } from '@angular/forms';
-import { NavigationEnd, Router } from '@angular/router';
 
 @Component({
   selector: 'app-venda',
@@ -16,12 +14,7 @@ export class VendaComponent implements OnInit {
 
   @ViewChild('formProdutos', { static: true }) formProdutos: NgForm;
 
-  constructor(
-    private produtoService: ProdutoService,
-    private docFiscaService: DocFiscalService,
-    private operadorService: OperadorService,
-    private router: Router) { }
-
+  constructor(private produtoService: ProdutoService, private docFiscaService: DocFiscalService) { }
   cliente : any
   responseProduto: ResponseProduto[];
   docFiscal: DocFiscal;
@@ -41,29 +34,9 @@ export class VendaComponent implements OnInit {
   numItem: number = 0;
   pagamentos: Array<Pagamento> = [];
 
-  requestGerente : any;
-  nmMatriculaGerente : string;
-  emailCliente : string
-  aberturaFechamento : any
-
   ngOnInit(): void {
     this.cliente = JSON.parse(localStorage['clienteCadastrado']);
     console.log(this.cliente);
-    this.aberturaFechamento = JSON.parse(localStorage['aberturaCaixa'])
-
-  }
-
-  cancelarVenda () {
-    this.operadorService.getOperador(this.nmMatriculaGerente).subscribe(
-      response => {this.requestGerente = response; console.log(this.requestGerente)
-        if (this.requestGerente.descricaoCargo == 'GERENTE' ) {
-          alert("Venda cancelada com sucesso!")
-          this.router.navigate(['/home']);
-        } else {
-          alert("Você não é gerente")
-        }
-      }
-    )
   }
 
   //Função para buscar o produto leo código no banco de dados
@@ -143,17 +116,16 @@ export class VendaComponent implements OnInit {
     //Formato do json a ser mandado para API
     let retorno: DocFiscal = {
       operacao: {
-        cdOperacao: 1
+        cdOperacao: 4
       },
       filial: {
         cdFilial: this.filial.cdFilial
       },
       cliente: {
-        idCliente: this.cliente.idCliente,
-        email : this.emailCliente
+        idCliente: this.cliente.idCliente
       },
 
-      dataAbertura: this.aberturaFechamento.dataAbertura,
+      dataAbertura: "",
       dataFechamento: "",
       flagNota: 1,
       valorDocumento: this.totalGeral,
@@ -163,8 +135,7 @@ export class VendaComponent implements OnInit {
     }
 
     localStorage.vendas = JSON.stringify(retorno.valorDocumento)
-    localStorage.setItem('clienteCadastrado', '');
-
+    
     this.docFiscaService.createDocFiscal(retorno).subscribe()
     console.log(retorno);
 
