@@ -49,3 +49,7 @@ export interface Produto {
     valorProduto: number,
     descricaoProduto: String
 }
+
+export interface NrNotaFiscal{
+    proxNumFiscal: number;
+}

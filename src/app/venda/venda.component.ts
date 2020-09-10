@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { ProdutoService } from './shared/produto.service';
 import { DocFiscalService } from './shared/doc-fiscal.service'
 import { ResponseProduto, Produto } from './shared/produto.model';
-import { DocFiscal, DocumentoItem } from './shared/doc-fiscal.model';
+import { DocFiscal, DocumentoItem, NrNotaFiscal } from './shared/doc-fiscal.model';
 import { NgForm } from '@angular/forms';
 import { OperadorService } from '../modal/modal-matricula-operador/shared/operador.service';
 
@@ -40,6 +40,7 @@ export class VendaComponent implements OnInit {
   nmMatriculaGerente: string;
   itemSelec: any;
   trocoNegat: any = 0.0;
+  nxtNumber: NrNotaFiscal;
 
   ngOnInit(): void {
     this.cliente = JSON.parse(localStorage['clienteCadastrado']);
@@ -71,7 +72,7 @@ export class VendaComponent implements OnInit {
     let item = new VendaItem(this.request.cdProduto, this.request.valorProduto,
       this.request.descricaoProduto, this.quantidade);
     this.listaDeProdutos.push(item);
-    this.total = Math.round((this.total +(this.request.valorProduto * this.quantidade))* 100) / 100;
+    this.total = Math.round((this.total + (this.request.valorProduto * this.quantidade)) * 100) / 100;
     this.totalGeral = Math.round(this.total * 100) / 100;
     this.qtdTotal += (this.quantidade);
     this.addItensNota();
@@ -107,7 +108,7 @@ export class VendaComponent implements OnInit {
       pagto.vlPagamento = this.recebido;
     }
     this.pagamentos.push(pagto);
-    this.total = Math.round((this.total - this.recebido) *100)/100;
+    this.total = Math.round((this.total - this.recebido) * 100) / 100;
     this.recebido = 0;
     console.log(this.pagamentos);
   }
@@ -119,16 +120,16 @@ export class VendaComponent implements OnInit {
 
   //Função para calculo de troco
   calcularTroco() {
-    if(this.recebido < this.total ){
+    if (this.recebido < this.total) {
       this.trocoNegat = ("Faltam: R$ " + Math.round((this.total - this.recebido) * 100) / 100);
     }
     this.troco = Math.round((this.recebido - this.total) * 100) / 100;
-    
+
   }
 
-  //Função para adicionar as informações do documento fiscal
+  // Função para adicionar as informações do documento fiscal
   registrarDocFiscal() {
-    //Formato do json a ser mandado para API
+    // Formato do json a ser mandado para API
     let retorno: DocFiscal = {
       operacao: {
         cdOperacao: 1
@@ -161,11 +162,12 @@ export class VendaComponent implements OnInit {
     this.itemSelec = itemSelecionado
   }
 
-  //Função de
+  //Função de cancelamento de produtos
   cancelarProduto() {
 
     this.operadorService.getOperador(this.nmMatriculaGerente).subscribe(
-      response => {this.requestGerente = response; console.log(this.requestGerente)
+      response => {
+        this.requestGerente = response; console.log(this.requestGerente)
         if (this.requestGerente.descricaoCargo == 'GERENTE') {
           alert("Produto Cancelado");
           this.total = (this.total - (this.listaDeProdutos[this.itemSelec].valorProduto * this.listaItensNota[this.itemSelec].qtdItem));
@@ -186,6 +188,10 @@ export class VendaComponent implements OnInit {
 
   }
 
+  //Função para gerar numero da nota fiscal
+  gerarNrNf() {
+    this.docFiscaService.getNrNotaFiscal(this.filial.cdFilial).subscribe(response => this.nxtNumber = response)
+  }
 }
 //Final do component
 
