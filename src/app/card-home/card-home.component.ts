@@ -35,11 +35,7 @@ export class CardHomeComponent implements OnInit {
     localStorage.totalValores()
 
   }
-  
-  relodar() {
-    location.reload();
-  }
- 
+
   guardarValores () {
     this.validarLocalStorage()
     this.guardarAqui = JSON.parse(localStorage.getItem('vendas'))

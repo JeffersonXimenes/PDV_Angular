@@ -9,7 +9,7 @@ import { Observable } from 'rxjs';
 export class DocFiscalService {
 
   constructor(private http: HttpClient) { }
-  private readonly API = 'http://localhost:8080/pdv/docVendaA';
+  private readonly API = 'http://localhost:8080/pdv/docVenda';
   private readonly APINrNotaFiscal = 'http://localhost:8080/pdv/proxNum';
 
   createDocFiscal(request: DocFiscal): Observable<DocFiscal> {
