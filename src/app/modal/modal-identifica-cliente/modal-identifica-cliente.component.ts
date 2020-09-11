@@ -2,6 +2,8 @@ import { ClienteService } from './shared/cliente.service';
 import { Component, OnInit } from '@angular/core';
 import { Cliente } from './shared/cliente.model';
 import { Router } from '@angular/router';
+import { ValidateBrService } from 'angular-validate-br';
+import { FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-modal-identifica-cliente',
@@ -9,6 +11,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./modal-identifica-cliente.component.css']
 })
 export class ModalIdentificaClienteComponent implements OnInit {
+  ModalIdentificaCliente: FormGroup;
 
   request : Cliente = {
     idCliente : 0,
@@ -25,8 +28,12 @@ export class ModalIdentificaClienteComponent implements OnInit {
 
   constructor(
     private clienteService : ClienteService,
-    private router : Router
+    private router : Router,
+    private validateBrService : ValidateBrService
   ) { }
+
+
+
 
   ngOnInit(): void {}
 

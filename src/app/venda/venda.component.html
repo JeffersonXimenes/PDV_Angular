@@ -123,12 +123,9 @@
                 <div class="dropdown">
                     <button style="width: 465px" class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">SELECIONE A FORMA DE PAGAMENTO</button>
                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                        <a class="dropdown-item" data-dismiss="modal" data-toggle="modal"
-                            href="#modalDinheiro">DINHEIRO</a>
-                        <a class="dropdown-item" data-dismiss="modal" data-toggle="modal" href="#modalDebito">CARTÃO DE
-                            DÉBITO</a>
-                        <a class="dropdown-item" data-dismiss="modal" data-toggle="modal" href="#modalCredito">CARTÃO DE
-                            CRÉDITO</a>
+                        <a class="dropdown-item" data-dismiss="modal" data-toggle="modal" href="#modalDinheiro">DINHEIRO</a>
+                        <a class="dropdown-item" data-dismiss="modal" data-toggle="modal" href="#modalDebito">CARTÃO DE DÉBITO</a>
+                        <a class="dropdown-item" data-dismiss="modal" data-toggle="modal" href="#modalCredito">CARTÃO DE CRÉDITO</a>
                         <!-- <a class="dropdown-item" href="#">Cartão de crédito</a> -->
                     </div>
                 </div>
@@ -186,7 +183,7 @@
                     href="#modalCupom" (click)="addPagamento(4, 0)">CONFIRMAR</button>
 
                 <button *ngIf="total > recebido" class="btn btn-primary" data-dismiss="modal" data-toggle="modal"
-                    href="#formasPagamento" (click)="addPagamento(4, 1)">ADD novo pagamento</button>
+                    href="#formasPagamento" (click)="addPagamento(4, 1)">ADD NOVO PAGAMENTO</button>
                 <!-- addPagamento(tipoPagamento: number) -->
             </div>
         </div>
@@ -373,7 +370,7 @@
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title consertaModalTitle" id="exampleModalLongTitle">FORMA DE PAGAMENTO: DÉBITO</h5>
+                <h5 class="modal-title consertaModalTitle" id="exampleModalLongTitle" style="margin-left: 65px">FORMA DE PAGAMENTO: DÉBITO</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -394,7 +391,7 @@
                 <a class="btn btn-danger" id="btnCancelarPagamento" data-dismiss="modal" data-toggle="modal" href="#formasPagamento">CANCELAR</a>
                 <button *ngIf="recebido == total" class="btn btn-success" data-dismiss="modal" data-toggle="modal" href="#modalInserirCartao" (click)="addPagamento(2, 0)">CONFIRMAR</button>
 
-                <button *ngIf="recebido < total" class="btn btn-success" data-dismiss="modal" data-toggle="modal" href="#modalInserirCartao" (click)="addPagamento(2, 1)">ADD novo pagamento</button>
+                <button *ngIf="recebido < total" class="btn btn-success" data-dismiss="modal" data-toggle="modal" href="#modalInserirCartao" (click)="addPagamento(2, 1)">ADD NOVO PAGAMENTO</button>
             </div>
         </div>
     </div>
@@ -406,19 +403,16 @@
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLongTitle">Forma de Pagamento: Crédito</h5>
+                <h5 class="modal-title consertaModalTitle" id="exampleModalLongTitle" style="margin-left: 55px">FORMA DE PAGAMENTO: CRÉDITO</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
                 <form id="sla">
-
                     <div class="form-group">
-
                         <label for="formGroupExampleInput">TOTAL</label>
                         <input type="text" value="{{total | currency: 'BRL'}}" class="form-control" id="total" readonly>
-
                         <div class="form-group">
                             <label for="formGroupExampleInput">RECEBIDO</label>
                             <input type="number" class="form-control" name="recebido" id="recebido"
@@ -443,22 +437,41 @@
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLongTitle">Forma de Pagamento</h5>
+                <h5 class="modal-title consertaModalTitle" id="exampleModalLongTitle" style="margin-left: 180px">PAGAMENTO</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
-                <label for="formGroupExampleInput" style="text-align: center;">Insira o Cartão na
-                    maquininha</label>
+                <label for="formGroupExampleInput" style="text-align: center;" style="margin-left: 120px">INSIRA O CARTÃO</label>
             </div>
             <div class="modal-footer">
-                <a class="btn btn-danger" id="btnCancelarPagamento" (click)="cancelarPagamentoCartao()"
-                    data-dismiss="modal" data-toggle="modal" href="#formasPagamento">CANCELAR</a>
-                <button *ngIf="total > recebido " class="btn btn-success" data-dismiss="modal" data-toggle="modal"
-                    href="#formasPagamento">outra forma</button>
-                <button *ngIf=" recebido >= total" class="btn btn-success" data-dismiss="modal" data-toggle="modal"
-                    href="#modalCupom">CONFIRMAR</button>
+                <a class="btn btn-danger" id="btnCancelarPagamento" (click)="cancelarPagamentoCartao()" data-dismiss="modal" data-toggle="modal" href="#formasPagamento">CANCELAR</a>
+                <button *ngIf="total > recebido " class="btn btn-success" data-dismiss="modal" data-toggle="modal" href="#formasPagamento">outra forma</button>
+                <button *ngIf=" recebido >= total" class="btn btn-success" data-dismiss="modal" data-toggle="modal" href="#modalInserirSenha">CONFIRMAR</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Insira sua senha -->
+<div class="modal fade" id="modalInserirSenha" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title consertaModalTitle" id="exampleModalLongTitle" style="margin-left: 155px">INSERIR SENHA</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <label for="formGroupExampleInput" style="text-align: center;" style="margin-left: 120px">INSIRA A SENHA</label>
+            </div>
+            <div class="modal-footer">
+                <a class="btn btn-danger" id="btnCancelarPagamento" (click)="cancelarPagamentoCartao()" data-dismiss="modal" data-toggle="modal" href="#formasPagamento">CANCELAR</a>
+                <button *ngIf="total > recebido " class="btn btn-success" data-dismiss="modal" data-toggle="modal" href="#formasPagamento">OUTRA FORMA</button>
+                <button *ngIf=" recebido >= total" class="btn btn-success" data-dismiss="modal" data-toggle="modal" href="#modalCupom">CONFIRMAR</button>
             </div>
         </div>
     </div>
@@ -485,8 +498,7 @@
             </div>
             <div class="modal-footer consertaModalBotton">
                 <button type="button" routerLink="venda" class="btn btn-danger" data-dismiss="modal">CANCELAR</button>
-                <button type="button" class="btn btn btn-success" data-dismiss="modal" id="btnCancelarPagamento"
-                    (click)="cancelarProduto()">CONFIRMAR</button>
+                <button type="button" class="btn btn btn-success" data-dismiss="modal" id="btnCancelarPagamento" (click)="cancelarProduto()">CONFIRMAR</button>
             </div>
         </div>
     </div>

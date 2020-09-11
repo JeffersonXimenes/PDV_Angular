@@ -25,6 +25,7 @@ import { StorageServiceModule } from 'ngx-webstorage-service';
 import { NgxMaskModule } from 'ngx-mask';
 import { ModalSaidaOperadorComponent } from './modal-saida-operador/modal-saida-operador.component';
 import { AuthGuardService } from './guardRoute/auth-guard.service';
+import { AngularValidateBrLibModule } from 'angular-validate-br';
 
 
 @NgModule({
@@ -52,6 +53,7 @@ import { AuthGuardService } from './guardRoute/auth-guard.service';
     HttpClientModule,
     StorageServiceModule,
     NgxMaskModule.forRoot(),
+    AngularValidateBrLibModule
 
   ],
   providers: [
